@@ -1,11 +1,20 @@
+"""
+Основной конфигурационный модуль приложения.
+Содержит настройки для подключения к базам данных и параметры запуска приложения.
+"""
+
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# указывает на `app/`
+# Базовый путь к директории приложения (указывает на `app/`)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 class Settings(BaseSettings):
+    """
+    Класс настроек приложения.
+    Загружает конфигурацию из переменных окружения или .env файла.
+    """
     APP_HOST: str
     APP_PORT: int
     DEBUG_MODE: bool
