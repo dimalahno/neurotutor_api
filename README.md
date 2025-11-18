@@ -51,7 +51,7 @@ wsl --update
 wsl --list --verbose
 ```
 
-# Установка контейнеров postgres и mongo
+# Установка контейнеров postgres, mongo и minio
 
 Перейдите в директорию neurotutor_api
 
@@ -67,6 +67,17 @@ docker compose down
 ```
 docker compose ps
 ```
+
+# Доступ к установленным контейнерам
+- Postgres: Используем PgAdmin
+- Mongo: Compass
+- Minio: Web интерфейс
+
+Открыть в браузере: http://localhost:9001
+* Логин: minioadmin
+* Пароль: minioadmin123
+
+После входа в административную панель создать бакет: ```tutor-courses```
 
 # Установка и настройка виртуального окружения
 Версия: Python 3.13
