@@ -42,11 +42,48 @@
         {
           "id": "warmup_speaking_01",
           "type": "speaking_prompt",
-          "inputType": ["audio","text"],
-          "prompts": [
-            "What do you do now?",
-            "Do you want to work in IT? Why or why not?",
-            "Which IT jobs do you know?"
+          "inputType": [
+            "audio",
+            "text"
+          ],
+          "show_question_mode": "sequential",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "What do you do now?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I work as a frontend developer in a small company.",
+              "targetPatterns": [
+                "I work as a ...",
+                "I work in ..."
+              ],
+              "keywords": [
+                "job",
+                "developer",
+                "company"
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Do you want to work in IT? Why or why not?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "Yes, I want to work in IT because I like solving problems with technology.",
+              "targetPatterns": [
+                "I want to ... because ...",
+                "I don't want to ... because ..."
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Which IT jobs do you know?",
+              "expectedAnswerType": "listing",
+              "modelAnswer": "I know software developer, QA engineer and data scientist.",
+              "keywords": [
+                "software developer",
+                "QA engineer",
+                "data scientist"
+              ]
+            }
           ],
           "llmCheck": {
             "enabled": true,
@@ -415,13 +452,90 @@
         {
           "id": "vocab_speaking_questions_01",
           "type": "speaking_prompt",
-          "inputType": ["audio","text"],
-          "prompts": [
-            "How do you keep up with what’s going on in the world?",
-            "How much time do you think it takes to learn a new skill from scratch?",
-            "Are you normally concise when you speak?",
-            "What are some things you have a solid understanding of?",
-            "Which of these 5 jobs is the hardest to do? Which is the easiest? Why?"
+          "inputType": [
+            "audio",
+            "text"
+          ],
+          "show_question_mode": "sequential",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "How do you keep up with what’s going on in the world?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I keep up with the world by reading news websites and following experts on social media.",
+              "targetPatterns": [
+                "I keep up with ... by ...",
+                "I follow ... to stay updated"
+              ],
+              "keywords": [
+                "news",
+                "read",
+                "follow",
+                "stay updated"
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "How much time do you think it takes to learn a new skill from scratch?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I think it takes several months to learn a new skill from scratch.",
+              "targetPatterns": [
+                "I think it takes ... to ...",
+                "In my opinion ..."
+              ],
+              "keywords": [
+                "time",
+                "learn",
+                "skill",
+                "months"
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Are you normally concise when you speak?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "Yes, I try to be concise when I speak because it helps others understand me faster.",
+              "targetPatterns": [
+                "Yes, I try to be ...",
+                "No, I usually ..."
+              ],
+              "keywords": [
+                "concise",
+                "speak",
+                "communicate"
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "What are some things you have a solid understanding of?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I have a solid understanding of programming basics and data analysis.",
+              "targetPatterns": [
+                "I have a solid understanding of ...",
+                "I'm confident in ..."
+              ],
+              "keywords": [
+                "understanding",
+                "skills",
+                "knowledge"
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Which of these 5 jobs is the hardest to do? Which is the easiest? Why?",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I think the hardest job is a software architect because it requires deep knowledge and responsibility. The easiest is a junior support specialist because the tasks are more basic.",
+              "targetPatterns": [
+                "I think the hardest job is ... because ...",
+                "The easiest job is ... because ..."
+              ],
+              "keywords": [
+                "hardest",
+                "easiest",
+                "job",
+                "because"
+              ]
+            }
           ],
           "llmCheck": {
             "enabled": true,
@@ -1144,8 +1258,108 @@
           "id": "speaking_roleplay_01",
           "type": "roleplay",
           "scenario": "tech_meetup",
-          "inputType": "text_or_audio",
+          "inputType": [
+            "audio",
+            "text"
+          ],
           "prompt": "Imagine you are at a tech meetup. Introduce yourself and talk about your job or the job you want in tech.",
+          "turns": [
+            {
+              "id": "t1",
+              "role": "tutor",
+              "type": "question",
+              "text": "Hi! Nice to meet you. What’s your name?"
+            },
+            {
+              "id": "a1",
+              "role": "student",
+              "type": "answer",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "Hi, my name is Alex.",
+              "targetPatterns": [
+                "My name is ...",
+                "I'm ..."
+              ],
+              "keywords": [
+                "name"
+              ]
+            },
+            {
+              "id": "t2",
+              "role": "tutor",
+              "type": "question",
+              "text": "Great, Alex! What do you do?"
+            },
+            {
+              "id": "a2",
+              "role": "student",
+              "type": "answer",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I work as a software developer.",
+              "targetPatterns": [
+                "I work as ...",
+                "I work in ..."
+              ],
+              "keywords": [
+                "work",
+                "job"
+              ]
+            },
+            {
+              "id": "t3",
+              "role": "tutor",
+              "type": "question",
+              "text": "Nice! What are you working on these days?"
+            },
+            {
+              "id": "a3",
+              "role": "student",
+              "type": "answer",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I'm working on a mobile app for my company.",
+              "targetPatterns": [
+                "I'm working on ...",
+                "Right now I'm ...ing"
+              ],
+              "keywords": [
+                "working",
+                "project"
+              ]
+            },
+            {
+              "id": "t4",
+              "role": "tutor",
+              "type": "question",
+              "text": "Cool! Why are you interested in tech?"
+            },
+            {
+              "id": "a4",
+              "role": "student",
+              "type": "answer",
+              "expectedAnswerType": "short_free_speech",
+              "modelAnswer": "I'm interested in tech because I enjoy solving problems.",
+              "targetPatterns": [
+                "I'm interested in ... because ...",
+                "I like ... because ..."
+              ],
+              "keywords": [
+                "interested",
+                "tech",
+                "because"
+              ]
+            },
+            {
+              "id": "t5",
+              "role": "tutor",
+              "type": "question",
+              "text": "Nice talking to you! Enjoy the meetup!"
+            },
+            {
+              "id": "end",
+              "role": "system",
+              "type": "end"
+            }
+          ],
           "autoCheck": {
             "type": "none"
           },
