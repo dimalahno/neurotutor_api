@@ -29,8 +29,8 @@ create table if not exists d_user_status
     status      numeric(1) default 1
         constraint d_user_status_status_check
             check (status = ANY (ARRAY [(1)::numeric, (2)::numeric])),
-    constraint uq_d_user_status_code unique (code),
-    date_entry  timestamptz default now() not null
+    constraint uq_d_user_status_code unique (code), -- !
+    date_entry  timestamptz default now() not null  -- !
 );
 comment on table d_user_status is 'Статус пользователя';
 comment on column d_user_status.id is 'Идентификатор';
@@ -52,8 +52,8 @@ create table d_user_role
     status      numeric(1) default 1
         constraint d_user_role_status_check
             check (status = ANY (ARRAY [(1)::numeric, (2)::numeric])),
-    constraint uq_d_user_role_code unique (code),
-    date_entry  timestamptz default now() not null
+    constraint uq_d_user_role_code unique (code), -- !
+    date_entry  timestamptz default now() not null -- !
 );
 comment on table d_user_role is 'Роли';
 comment on column d_user_role.id is 'Идентификатор';
