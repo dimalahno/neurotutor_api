@@ -24,13 +24,13 @@ $$ LANGUAGE plpgsql;
 create table if not exists d_user_status
 (
     id          smallserial primary key,
-    code        varchar(8)               not null,
-    description varchar(32)              not null,
-    status      numeric(1) default 1
+    code        varchar(8)                not null,
+    description varchar(32)               not null,
+    status      numeric(1)  default 1
         constraint d_user_status_status_check
             check (status = ANY (ARRAY [(1)::numeric, (2)::numeric])),
-    constraint uq_d_user_status_code unique (code), -- !
-    date_entry  timestamptz default now() not null  -- !
+    constraint uq_d_user_status_code unique (code),
+    date_entry  timestamptz default now() not null
 );
 comment on table d_user_status is 'Статус пользователя';
 comment on column d_user_status.id is 'Идентификатор';
@@ -40,6 +40,14 @@ comment on column d_user_status.status is 'Статус(1 - Активный, 2 
 comment on column d_user_status.date_entry is 'Дата записи';
 
 
+insert into d_user_status (code, description, status)
+values ('CREATE', 'Создан', 1),
+       ('ACTIVE', 'Активный', 1),
+       ('INACTIVE', 'Неактивный', 1),
+       ('DELETED', 'Удаленный', 1)
+on conflict (id) do nothing;
+
+
 -- ============================================
 --  ТАБЛИЦА: d_user_role
 --  Роли пользователя
@@ -47,13 +55,13 @@ comment on column d_user_status.date_entry is 'Дата записи';
 create table d_user_role
 (
     id          smallserial primary key,
-    code        varchar(8)               not null,
-    description varchar(32)              not null,
-    status      numeric(1) default 1
+    code        varchar(8)                not null,
+    description varchar(32)               not null,
+    status      numeric(1)  default 1
         constraint d_user_role_status_check
             check (status = ANY (ARRAY [(1)::numeric, (2)::numeric])),
-    constraint uq_d_user_role_code unique (code), -- !
-    date_entry  timestamptz default now() not null -- !
+    constraint uq_d_user_role_code unique (code),
+    date_entry  timestamptz default now() not null
 );
 comment on table d_user_role is 'Роли';
 comment on column d_user_role.id is 'Идентификатор';
@@ -62,6 +70,49 @@ comment on column d_user_role.description is 'Описание';
 comment on column d_user_role.status is 'Статус(1 - Активный, 2 - Неактивный)';
 comment on column d_user_role.date_entry is 'Дата записи';
 
+insert into d_user_role (code, description, status)
+values ('ADMIN', 'Администратор', 1),
+       ('USER', 'Пользователь', 1),
+       ('TEACHER', 'Учитель', 1)
+on conflict (id) do nothing;
+
+-- ============================================
+--  ТАБЛИЦА: users
+--  Пользователи системы (ученики / преподаватели / админы)
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS users
+(
+    id            BIGSERIAL PRIMARY KEY,
+    email         VARCHAR     NOT NULL UNIQUE,
+    first_name    VARCHAR(50) NOT NULL,
+    last_name     VARCHAR(50) NOT NULL,
+    middle_name   VARCHAR(50),
+    password_hash VARCHAR(300),
+    telegram_id   BIGINT,
+    status_id     SMALLINT REFERENCES d_user_status (id),
+    created_at    timestamptz NOT NULL DEFAULT now(),
+    updated_at    timestamptz NOT NULL DEFAULT now()
+);
+
+COMMENT ON TABLE users IS 'Пользователи системы: ученики, преподаватели, администраторы';
+COMMENT ON COLUMN users.id IS 'Уникальный идентификатор пользователя';
+COMMENT ON COLUMN users.email IS 'Основной e-mail пользователя (логин, уникальный)';
+COMMENT ON COLUMN users.first_name IS 'Отображаемое имя пользователя (Имя)';
+COMMENT ON COLUMN users.last_name IS 'Отображаемое имя пользователя (Фамилия)';
+COMMENT ON COLUMN users.middle_name IS 'Отображаемое имя пользователя (Отчество)';
+COMMENT ON COLUMN users.password_hash IS 'Хеш пароля пользователя (если не используем внешнюю аутентификацию)';
+comment on column users.telegram_id is 'Уникальный идентификатор пользователя в Telegram';
+COMMENT ON COLUMN users.status_id IS 'Статус пользователя (d_user_status.id)';
+COMMENT ON COLUMN users.created_at IS 'Дата и время создания записи о пользователе';
+COMMENT ON COLUMN users.updated_at IS 'Дата и время последнего обновления записи о пользователе';
+
+-- Триггер на обновление updated_at
+CREATE TRIGGER trg_users_set_updated_at
+    BEFORE UPDATE
+    ON users
+    FOR EACH ROW
+EXECUTE FUNCTION set_updated_at();
 
 -- ============================================
 --  ТАБЛИЦА: user_roles
@@ -107,45 +158,6 @@ CREATE INDEX idx_user_tokens_user ON user_tokens (user_id);
 
 
 -- ============================================
---  ТАБЛИЦА: users
---  Пользователи системы (ученики / преподаватели / админы)
--- ============================================
-
-CREATE TABLE IF NOT EXISTS users
-(
-    id            BIGSERIAL PRIMARY KEY,
-    email         VARCHAR     NOT NULL UNIQUE,
-    first_name    VARCHAR(50) NOT NULL,
-    last_name     VARCHAR(50) NOT NULL,
-    middle_name   VARCHAR(50),
-    password_hash VARCHAR(300),
-    telegram_id   BIGINT,
-    status_id     SMALLINT REFERENCES d_user_status(id),
-    created_at    timestamptz   NOT NULL DEFAULT now(),
-    updated_at    timestamptz   NOT NULL DEFAULT now()
-);
-
-COMMENT ON TABLE users IS 'Пользователи системы: ученики, преподаватели, администраторы';
-COMMENT ON COLUMN users.id IS 'Уникальный идентификатор пользователя';
-COMMENT ON COLUMN users.email IS 'Основной e-mail пользователя (логин, уникальный)';
-COMMENT ON COLUMN users.first_name IS 'Отображаемое имя пользователя (Имя)';
-COMMENT ON COLUMN users.last_name IS 'Отображаемое имя пользователя (Фамилия)';
-COMMENT ON COLUMN users.middle_name IS 'Отображаемое имя пользователя (Отчество)';
-COMMENT ON COLUMN users.password_hash IS 'Хеш пароля пользователя (если не используем внешнюю аутентификацию)';
-comment on column users.telegram_id is 'Уникальный идентификатор пользователя в Telegram';
-COMMENT ON COLUMN users.status_id IS 'Статус пользователя (d_user_status.id)';
-COMMENT ON COLUMN users.created_at IS 'Дата и время создания записи о пользователе';
-COMMENT ON COLUMN users.updated_at IS 'Дата и время последнего обновления записи о пользователе';
-
--- Триггер на обновление updated_at
-CREATE TRIGGER trg_users_set_updated_at
-    BEFORE UPDATE
-    ON users
-    FOR EACH ROW
-EXECUTE FUNCTION set_updated_at();
-
-
--- ============================================
 --  ТАБЛИЦА: sessions
 --  Сессии прохождения урока пользователем
 -- ============================================
@@ -153,13 +165,13 @@ EXECUTE FUNCTION set_updated_at();
 CREATE TABLE IF NOT EXISTS sessions
 (
     id          BIGSERIAL PRIMARY KEY,
-    user_id     BIGINT        NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    lesson_id   varchar(64)   NOT NULL,
-    started_at  timestamptz   NOT NULL DEFAULT now(),
+    user_id     BIGINT      NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    lesson_id   varchar(64) NOT NULL,
+    started_at  timestamptz NOT NULL DEFAULT now(),
     finished_at timestamptz,
-    state       JSONB         NOT NULL DEFAULT '{}'::jsonb,
-    created_at  timestamptz   NOT NULL DEFAULT now(),
-    updated_at  timestamptz   NOT NULL DEFAULT now()
+    state       JSONB       NOT NULL DEFAULT '{}'::jsonb,
+    created_at  timestamptz NOT NULL DEFAULT now(),
+    updated_at  timestamptz NOT NULL DEFAULT now()
 );
 
 COMMENT ON TABLE sessions IS 'Сессии прохождения уроков пользователями';
@@ -203,10 +215,10 @@ CREATE TABLE IF NOT EXISTS attempts
     feedback      JSONB,
     status        varchar(20) NOT NULL DEFAULT 'scored',
     skill_type    varchar(32),
-    created_at    timestamptz   NOT NULL DEFAULT now(),
-    updated_at    timestamptz   NOT NULL DEFAULT now(),
+    created_at    timestamptz NOT NULL DEFAULT now(),
+    updated_at    timestamptz NOT NULL DEFAULT now(),
     CONSTRAINT chk_attempt_order_positive CHECK (attempt_order >= 1),
-    CONSTRAINT chk_attempt_status CHECK (status IN ('pending','scored','review_needed')),
+    CONSTRAINT chk_attempt_status CHECK (status IN ('pending', 'scored', 'review_needed')),
     CONSTRAINT uq_attempt_per_order UNIQUE (user_id, lesson_id, exercise_id, attempt_order)
 );
 
@@ -222,6 +234,7 @@ COMMENT ON COLUMN attempts.input_meta IS 'Дополнительные данн�
 COMMENT ON COLUMN attempts.score IS 'JSON-оценка результата: баллы по разным критериям';
 COMMENT ON COLUMN attempts.feedback IS 'JSON-обратная связь: комментарии, подсказки от модели';
 COMMENT ON COLUMN attempts.status IS 'Статус проверки попытки: pending / scored / review_needed';
+COMMENT ON COLUMN attempts.skill_type IS 'Тип навыка для упражнения (например, grammar, vocab, listening, speaking)';
 COMMENT ON COLUMN attempts.created_at IS 'Дата и время создания записи о попытке';
 COMMENT ON COLUMN attempts.updated_at IS 'Дата и время последнего обновления записи о попытке';
 
@@ -235,10 +248,6 @@ CREATE TRIGGER trg_attempts_set_updated_at
     ON attempts
     FOR EACH ROW
 EXECUTE FUNCTION set_updated_at();
-
-
-
-COMMENT ON COLUMN attempts.skill_type IS 'Тип навыка для упражнения (например, grammar, vocab, listening, speaking)'; -- !
 
 
 -- ============================================
@@ -293,8 +302,8 @@ CREATE TABLE IF NOT EXISTS courses
     title           VARCHAR(100) NOT NULL,
     description     VARCHAR(256) NOT NULL,
     level           VARCHAR(2),
-    created_at      timestamptz    NOT NULL DEFAULT now(),
-    updated_at      timestamptz    NOT NULL DEFAULT now()
+    created_at      timestamptz  NOT NULL DEFAULT now(),
+    updated_at      timestamptz  NOT NULL DEFAULT now()
 );
 
 COMMENT ON TABLE courses IS 'Курсы (метаданные + связь с MongoDB коллекцией courses)';
@@ -335,7 +344,7 @@ CREATE TABLE IF NOT EXISTS enrollments
     created_at       timestamptz   NOT NULL DEFAULT now(),
     updated_at       timestamptz   NOT NULL DEFAULT now(),
     CONSTRAINT enrollments_unique_user_course UNIQUE (user_id, course_id),
-    CONSTRAINT chk_enroll_status CHECK (status IN ('active','completed','dropped','frozen'))
+    CONSTRAINT chk_enroll_status CHECK (status IN ('active', 'completed', 'dropped', 'frozen'))
 );
 
 COMMENT ON TABLE enrollments IS 'Записи о зачислении пользователей на курсы';
@@ -361,25 +370,24 @@ CREATE TRIGGER trg_enrollments_set_updated_at
 EXECUTE FUNCTION set_updated_at();
 
 
-
 -- ============================================
 --  ТАБЛИЦА: lessons_files
 --  Аудиозаписи для прослушивания
 -- ============================================
 create table lessons_files
 (
-    id         bigserial primary key,
-    file_name  varchar(256),
-    file_path  varchar(256),
-    file_size  bigint,
-    mime_type  varchar(256),
-    state      numeric(1) default 1,
+    id          bigserial primary key,
+    file_name   varchar(256),
+    file_path   varchar(256),
+    file_size   bigint,
+    mime_type   varchar(256),
+    state       numeric(1)  default 1,
     lesson_id   varchar(64),
     unit_id     varchar(64),
     activity_id varchar(64),
     media_type  varchar(16),
-    created_at timestamptz  default now() not null,
-    updated_at timestamptz  default now() not null
+    created_at  timestamptz default now() not null,
+    updated_at  timestamptz default now() not null
 );
 
 comment on table lessons_files is 'Хранилище файлов уроков (аудио и другие медиа)';
@@ -406,7 +414,6 @@ CREATE TRIGGER trg_lessons_files_set_updated_at
 EXECUTE FUNCTION set_updated_at();
 
 
-
 -- ============================================
 --  ТАБЛИЦА: pronunciation_samples
 --  Аудиозаписи произношения (сырые данные + связь с S3/MinIO)
@@ -414,19 +421,19 @@ EXECUTE FUNCTION set_updated_at();
 
 CREATE TABLE IF NOT EXISTS pronunciation_samples
 (
-    id                 BIGSERIAL PRIMARY KEY,
-    user_id            BIGINT       NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    attempt_id         BIGINT       REFERENCES attempts (id) ON DELETE SET NULL,
-    lesson_id          varchar(64)  NOT NULL,
-    exercise_id        varchar      NOT NULL,
-    file_path          varchar(256) NOT NULL,
-    file_name          varchar(256) NOT NULL,
-    file_format        varchar(10),
-    mime_type          varchar(256),
-    transcription      TEXT,
-    score              JSONB,
-    created_at         timestamptz    NOT NULL DEFAULT now(),
-    updated_at         timestamptz    NOT NULL DEFAULT now()
+    id            BIGSERIAL PRIMARY KEY,
+    user_id       BIGINT       NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    attempt_id    BIGINT       REFERENCES attempts (id) ON DELETE SET NULL,
+    lesson_id     varchar(64)  NOT NULL,
+    exercise_id   varchar      NOT NULL,
+    file_path     varchar(256) NOT NULL,
+    file_name     varchar(256) NOT NULL,
+    file_format   varchar(10),
+    mime_type     varchar(256),
+    transcription TEXT,
+    score         JSONB,
+    created_at    timestamptz  NOT NULL DEFAULT now(),
+    updated_at    timestamptz  NOT NULL DEFAULT now()
 );
 
 COMMENT ON TABLE pronunciation_samples IS 'Хранилище пользовательских аудиозаписей произношения, связанных с упражнениями';
