@@ -24,7 +24,7 @@ wheels/
 venv/
 env/
 ENV/
-app/.env
+#app/.env
 .venv
 
 # IDE
