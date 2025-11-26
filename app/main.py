@@ -7,6 +7,7 @@ from app.config.exception_handlers_cfg import register_exception_handlers
 from app.config.logger_cfg import setup_logging
 from app.config.main_cfg import settings
 from app.config.request_logger_cfg import log_requests
+from app.routers import auth as auth_router, users as users_router  # ensure package imports
 
 # Настройка логирования
 setup_logging()
@@ -18,6 +19,9 @@ app = FastAPI(title="NeuroTutor API")
 app.middleware("http")(log_requests)
 
 # Роуты
+app.include_router(auth_router.router)
+app.include_router(users_router.router)
+
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
