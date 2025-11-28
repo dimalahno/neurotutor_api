@@ -35,24 +35,27 @@ class AuthService:
 
         return user, access, refresh
 
-    async def refresh(self, session: AsyncSession, refresh_token: str) -> tuple[str, str]:
+    async def refresh(self, session: AsyncSession, refresh_token: str):
         from app.core.jwt import decode_token
+
         payload = decode_token(refresh_token)
         if payload.get("type") != "refresh":
             raise ValueError("Invalid token type")
 
-        user_id = payload.get("sub")
-        access = create_access_token(sub=str(user_id))
-        refresh = create_refresh_token(sub=str(user_id))
+        user_id = int(payload["sub"])
+        user = await self.user_repo.get_by_id(session, user_id)
 
-        # create new token record
+        access = create_access_token(user=user)
+        new_refresh = create_refresh_token(user_id=user_id)
+
         token = UserToken(
-            user_id=int(user_id),
+            user_id=user_id,
             jwt=access,
-            refresh_token=refresh,
+            refresh_token=new_refresh,
             expires_at=datetime.utcnow(),
             created_at=datetime.utcnow(),
         )
         session.add(token)
         await session.commit()
-        return access, refresh
+
+        return access, new_refresh

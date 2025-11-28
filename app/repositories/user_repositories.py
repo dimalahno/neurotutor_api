@@ -20,6 +20,10 @@ class UserRepository(BaseRepository[User]):
         stmt = select(User).where(User.email == email)
         return await session.scalar(stmt)
 
+    async def get_by_id(self, session: AsyncSession, user_id: int):
+        stmt = select(User).where(User.id == user_id)
+        return await session.scalar(stmt)
+
 
 class UserRoleRepository(BaseRepository[UserRole]):
     def __init__(self):
