@@ -9,9 +9,10 @@ from datetime import datetime, timedelta
 import jwt
 
 from app.config.main_cfg import settings
+from app.models.user_models import User
 
 
-def create_access_token(sub: str, expires_delta: timedelta | None = None) -> str:
+def create_access_token(user: User, expires_delta: timedelta | None = None) -> str:
     """
     Создает JWT access token.
 
@@ -21,15 +22,26 @@ def create_access_token(sub: str, expires_delta: timedelta | None = None) -> str
 
     Returns:
         str: Закодированный JWT токен
+        :param expires_delta:
+        :param user:
     """
+
     now = datetime.now()
     exp = now + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
-    payload = {"sub": str(sub), "iat": now, "exp": exp, "type": "access"}
-    token = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.ALGORITHM)
-    return token
+
+    payload = {
+        "sub": str(user.id),
+        "email": user.email,
+        "roles": [r.code for r in user.roles],   # добавили роли
+        "iat": now,
+        "exp": exp,
+        "type": "access",
+    }
+
+    return jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.ALGORITHM)
 
 
-def create_refresh_token(sub: str, expires_delta: timedelta | None = None) -> str:
+def create_refresh_token(user_id: int, expires_delta: timedelta | None = None) -> str:
     """
     Создает JWT refresh token.
 
@@ -39,13 +51,21 @@ def create_refresh_token(sub: str, expires_delta: timedelta | None = None) -> st
 
     Returns:
         str: Закодированный JWT токен
+        :param expires_delta:
+        :param user_id:
     """
+
     now = datetime.now()
     exp = now + (expires_delta or timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS))
-    payload = {"sub": str(sub), "iat": now, "exp": exp, "type": "refresh"}
-    token = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.ALGORITHM)
-    return token
 
+    payload = {
+        "sub": str(user_id),
+        "iat": now,
+        "exp": exp,
+        "type": "refresh",
+    }
+
+    return jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.ALGORITHM)
 
 def decode_token(token: str) -> dict:
     """

@@ -11,26 +11,28 @@ class AuthService:
         self.user_repo = user_repo or UserRepository()
         self.token_repo = token_repo or UserTokenRepository()
 
-    async def login(self, session: AsyncSession, email: str, password: str) -> tuple[User, str, str]:
-        from app.core.security import verify_password  # local import to avoid cycle
+    async def login(self, session: AsyncSession, email: str, password: str):
+        from app.core.security import verify_password
 
         user = await self.user_repo.get_by_email(session, email)
         if not user or not verify_password(password, user.password_hash):
             raise ValueError("Invalid credentials")
 
-        access = create_access_token(sub=str(user.id))
-        refresh = create_refresh_token(sub=str(user.id))
+        access = create_access_token(user=user)
+        refresh = create_refresh_token(user_id=user.id)
 
         token = UserToken(
             user_id=user.id,
             jwt=access,
             refresh_token=refresh,
-            expires_at=datetime.utcnow(),
-            created_at=datetime.utcnow(),
+            expires_at=datetime.now(),
+            created_at=datetime.now(),
         )
+
         session.add(token)
         await session.commit()
         await session.refresh(token)
+
         return user, access, refresh
 
     async def refresh(self, session: AsyncSession, refresh_token: str) -> tuple[str, str]:
