@@ -1,8 +1,6 @@
 {
   "_id": "uuid",
   "index": 1,
-  "createdAt": "now()",
-  "updatedAt": "now()",
   "title": "Jobs in Tech",
   "lang_level": [
     "A2",

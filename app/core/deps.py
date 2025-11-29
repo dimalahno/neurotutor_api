@@ -1,6 +1,6 @@
 from typing import AsyncGenerator
 
-from app.db.session import async_session  # <-- предполагается, что есть этот модуль
+from app.config.session_db_cfg import async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.repositories.user_repositories import (

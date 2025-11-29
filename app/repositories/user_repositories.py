@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -18,12 +20,15 @@ class UserRepository(BaseRepository[User]):
 
     async def get_by_email(self, session: AsyncSession, email: str):
         stmt = select(User).where(User.email == email)
-        return await session.scalar(stmt)
+        res = await session.execute(stmt)
+        user = res.scalar_one_or_none()
+        return user
 
     async def get_by_id(self, session: AsyncSession, user_id: int):
         stmt = select(User).where(User.id == user_id)
-        return await session.scalar(stmt)
-
+        res = await session.execute(stmt)
+        user = res.scalar_one_or_none()
+        return user
 
 class UserRoleRepository(BaseRepository[UserRole]):
     def __init__(self):
@@ -50,7 +55,9 @@ class RoleDictionaryRepository(BaseRepository[DUserRole]):
 
     async def get_by_code(self, session: AsyncSession, code: str):
         stmt = select(DUserRole).where(DUserRole.code == code)
-        return await session.scalar(stmt)
+        res = await session.execute(stmt)
+        role = res.scalar_one_or_none()
+        return role
 
 
 class StatusDictionaryRepository(BaseRepository[DUserStatus]):

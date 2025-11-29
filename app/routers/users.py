@@ -3,6 +3,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
 from app.core.deps import get_session, get_user_repo
+from app.config.session_db_cfg import get_db, get_async_session
+from app.services import user_service
 from app.services.user_service import UserService
 from app.schemas.user import UserCreate, UserOut, UserUpdate
 
@@ -25,14 +27,17 @@ async def create_user(payload: UserCreate, session: AsyncSession = Depends(get_s
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(ex))
     return user
 
-@router.put("/{user_id}/role/{role_code}", status_code=status.HTTP_204_NO_CONTENT)
-async def change_user_role(user_id: int, role_code: str, session: AsyncSession = Depends(get_session)):
+@router.post("/{user_id}/role/{role_code}", response_model=UserOut)
+async def change_user_role(
+    user_id: int,
+    role_code: str,
+    session: AsyncSession = Depends(get_async_session),
+):
     svc = UserService()
-    return await svc.change_user_role(
-        session,
-        user_id=user_id,
-        role_code=role_code,
-    )
+    user = await svc.change_user_role(session, user_id, role_code)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
 @router.patch("/{user_id}", response_model=UserOut)
 async def update_user(

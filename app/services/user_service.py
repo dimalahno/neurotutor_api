@@ -105,6 +105,7 @@ class UserService:
         await session.commit()
         return True
 
+
     async def change_user_role(
             self,
             session: AsyncSession,
@@ -115,7 +116,7 @@ class UserService:
         Изменить тип пользователя (роль) по коду роли.
         Оставляем одну основную роль: очищаем старые, назначаем новую.
         """
-        user = await self.user_repo.get(session, user_id)
+        user = await self.user_repo.get_by_id(session, user_id)
         if not user:
             return None
 
