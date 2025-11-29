@@ -1,6 +1,6 @@
 from typing import AsyncGenerator
 
-from app.config.session_db_cfg import async_session
+from app.config.db_cfg import async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.repositories.user_repositories import (

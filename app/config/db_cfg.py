@@ -1,6 +1,7 @@
-from app.config.postgres_cfg import SessionLocal
-from typing import AsyncGenerator, Generator
 from sqlalchemy import create_engine
+from typing import AsyncGenerator, Generator
+from sqlalchemy.orm import sessionmaker
+
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
@@ -33,8 +34,12 @@ sync_engine = create_engine(
 )
 
 # Синхронная фабрика сессий (если где-то нужна синхронная сессия)
-from sqlalchemy.orm import sessionmaker
-SessionLocal = sessionmaker(bind=sync_engine, autocommit=False, autoflush=False, expire_on_commit=False)
+SessionLocal = sessionmaker(
+    bind=sync_engine,
+    autocommit=False,
+    autoflush=False,
+    expire_on_commit=False,
+)
 
 # --- Асинхронный движок и фабрика сессий ---
 async_engine = create_async_engine(
