@@ -84,8 +84,6 @@ async def upload_courses(
         )
         mongo_course_id = str(insert_result.inserted_id)
 
-
-
     # 2) Postgres: upsert по mongo_course_id
     course_row = await CourseRepository.upsert_by_mongo_id(
         session=session,
@@ -108,73 +106,91 @@ async def upload_courses(
     }
 
 
-@router.post("/upload-lessons")
+@router.post("/upload-lessons/{course_id}")
 async def upload_lessons(
+    course_id: int,
     file: UploadFile = File(...),
+    session: AsyncSession = Depends(get_async_session),
 ):
     """
-    1) Загружаем JSON с уроками (например init_lessons.json)
-    2) Сохраняем/апдейтим документы в MongoDB (коллекция lessons)
-    3) Обновляем первый найденный курс в Mongo, заполняя поле lessons[]:
-       [{lesson_id, index, title}, ...]
+    1) Загружаем JSON с одним уроком (dict)
+    2) Находим курс по course_id в Postgres
+    3) Берём mongo_course_id из курса
+    4) Создаём lesson в Mongo (id генерит Mongo)
+    5) В lesson пишем mongo_course_id для связки
+    6) Добавляем lesson в lessons[] у соответствующего course (Mongo)
     """
     data = await _read_json_file(file)
 
-    if isinstance(data, dict):
-        lessons_data = [data]
-    elif isinstance(data, list):
-        lessons_data = data
-    else:
+    if not isinstance(data, dict):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="JSON must be object or array of objects",
+            detail="JSON must be a single object",
         )
 
-    lessons_meta: List[Dict[str, Any]] = []
-
-    for idx, lesson_doc in enumerate(lessons_data, start=1):
-        lesson_id: Optional[str] = (
-            lesson_doc.get("_id")
-            or lesson_doc.get("lesson_id")
-            or lesson_doc.get("id")
-        )
-        if not lesson_id:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Lesson must contain '_id' or 'lesson_id'",
-            )
-
-        lesson_doc["_id"] = lesson_id
-        index = lesson_doc.get("index", idx)
-        title = lesson_doc.get("title", "")
-
-        # Mongo: сохраняем/обновляем документ урока
-        await mongo_db["lessons"].replace_one(
-            {"_id": lesson_id},
-            lesson_doc,
-            upsert=True,
+    # 3) Ищем курс в Postgres по course_id
+    course_row = await CourseRepository.get_by_id(session, course_id)
+    if not course_row:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Course not found",
         )
 
-        lessons_meta.append(
-            {
-                "lesson_id": lesson_id,
-                "index": index,
-                "title": title,
-            }
+    mongo_course_id = course_row.mongo_course_id
+    if not mongo_course_id:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Course has no mongo_course_id",
         )
 
-    # Привязываем все уроки к первому курсу (MVP-вариант под текущий init_courses.json)
-    course_doc = await mongo_db["courses"].find_one({})
-    linked_course_id = None
-    if course_doc:
-        linked_course_id = course_doc["_id"]
-        await mongo_db["courses"].update_one(
-            {"_id": linked_course_id},
-            {"$set": {"lessons": lessons_meta}},
+    # Конвертируем строковый идентификатор в ObjectId для Mongo
+    try:
+        course_mongo_obj_id = ObjectId(mongo_course_id)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Invalid mongo_course_id stored for course",
         )
+
+    lessons_coll = mongo_db["lessons"]
+    courses_coll = mongo_db["courses"]
+
+    index = data.get("index", 1)
+    title = data.get("title", "")
+
+    # 5) Готовим документ урока: _id не берём из файла, mongo_course_id добавляем
+    lesson_doc: Dict[str, Any] = dict(data)
+    lesson_doc.pop("_id", None)
+    lesson_doc["mongo_course_id"] = mongo_course_id
+
+    # 4) Вставляем урок, _id генерит Mongo
+    insert_result = await lessons_coll.insert_one(lesson_doc)
+    lesson_mongo_id = str(insert_result.inserted_id)
+
+    # Метаданные для встраивания в course.lessons[]
+    lesson_meta = {
+        "lesson_id": lesson_mongo_id,
+        "index": index,
+        "title": title,
+    }
+
+    # Проверяем, что курс есть в Mongo
+    course_doc = await courses_coll.find_one({"_id": course_mongo_obj_id})
+    if not course_doc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Course not found in MongoDB",
+        )
+
+    # 6) Добавляем lesson в массив lessons курса
+    await courses_coll.update_one(
+        {"_id": course_mongo_obj_id},
+        {"$push": {"lessons": lesson_meta}},
+    )
 
     return {
         "status": "ok",
-        "lessons_count": len(lessons_meta),
-        "linked_course_id": linked_course_id,
+        "lesson_id": lesson_mongo_id,
+        "course_id": course_id,
+        "mongo_course_id": mongo_course_id,
     }
