@@ -1,6 +1,7 @@
 import json
 from typing import Any, Dict, List, Optional
 
+from bson import ObjectId
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -128,7 +129,7 @@ async def upload_lessons(
             detail="JSON must be a single object",
         )
 
-    # 3) Ищем курс в Postgres по course_id
+    # Ищем курс в Postgres по course_id
     course_row = await CourseRepository.get_by_id(session, course_id)
     if not course_row:
         raise HTTPException(
@@ -158,12 +159,11 @@ async def upload_lessons(
     index = data.get("index", 1)
     title = data.get("title", "")
 
-    # 5) Готовим документ урока: _id не берём из файла, mongo_course_id добавляем
+    # Готовим документ урока: _id не берём из файла, mongo_course_id добавляем
     lesson_doc: Dict[str, Any] = dict(data)
-    lesson_doc.pop("_id", None)
     lesson_doc["mongo_course_id"] = mongo_course_id
 
-    # 4) Вставляем урок, _id генерит Mongo
+    # Вставляем урок, _id генерит Mongo
     insert_result = await lessons_coll.insert_one(lesson_doc)
     lesson_mongo_id = str(insert_result.inserted_id)
 
@@ -182,7 +182,7 @@ async def upload_lessons(
             detail="Course not found in MongoDB",
         )
 
-    # 6) Добавляем lesson в массив lessons курса
+    # Добавляем lesson в массив lessons курса
     await courses_coll.update_one(
         {"_id": course_mongo_obj_id},
         {"$push": {"lessons": lesson_meta}},
