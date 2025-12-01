@@ -3,6 +3,7 @@
   "slug": "english-for-it",
   "title": "English for IT",
   "description": "12-урочный курс английского языка для IT-специалистов",
+  "lang_level": "A2",
   "lessons": [
     { "lesson_id": "lesson_1_jobs_in_tech", "index": 1, "title": "Jobs in Tech" }
   ]

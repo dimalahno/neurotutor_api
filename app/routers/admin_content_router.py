@@ -32,69 +32,79 @@ async def upload_courses(
     2) Сохраняем/апдейтим документы в MongoDB (коллекция courses)
     3) Сохраняем/апдейтим строки в Postgres (таблица courses)
     """
-    data = await _read_json_file(file)
+    course_data = await _read_json_file(file)
 
-    if isinstance(data, dict):
-        courses_data = [data]
-    elif isinstance(data, list):
-        courses_data = data
-    else:
+    if not isinstance(course_data, dict):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="JSON must be object or array of objects",
+            detail="JSON must be a single object",
         )
 
-    result_payload: List[Dict[str, Any]] = []
+    title = course_data.get("title") or ""
+    description = course_data.get("description") or ""
+    level = course_data.get("lang_level")
+    slug = course_data.get("slug")
 
-    for course_doc in courses_data:
-        mongo_course_id: Optional[str] = course_doc.get("_id") or course_doc.get("slug")
-        if not mongo_course_id:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Course must contain '_id' or 'slug'",
-            )
-
-        title = course_doc.get("title") or ""
-        description = course_doc.get("description") or ""
-        level = course_doc.get("level")
-
-        # 1) Mongo: сохраняем в коллекцию courses
-        mongo_payload = {
-            "_id": mongo_course_id,
-            "slug": course_doc.get("slug"),
-            "title": title,
-            "description": description,
-            "level": level,
-            # lessons будем заполнять на шаге загрузки lessons
-        }
-
-        await mongo_db["courses"].replace_one(
-            {"_id": mongo_course_id},
-            mongo_payload,
-            upsert=True,
+    if not slug:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Course must contain 'slug'",
         )
 
-        # 2) Postgres: upsert по mongo_course_id
-        course_row = await CourseRepository.upsert_by_mongo_id(
-            session=session,
-            mongo_course_id=mongo_course_id,
-            title=title,
-            description=description,
-            level=level,
-        )
+    courses_coll = mongo_db["courses"]
 
-        result_payload.append(
+    # Пытаемся найти курс по slug
+    existing = await courses_coll.find_one({"slug": slug})
+    # 1) Mongo: сохраняем в коллекцию courses
+    if existing:
+        # Используем существующий _id из Mongo
+        mongo_course_id = str(existing["_id"])
+        await courses_coll.update_one(
+            {"_id": existing["_id"]},
             {
-                "mongo_course_id": mongo_course_id,
-                "pg_course_id": course_row.id,
+                "$set": {
+                    "slug": slug,
+                    "title": title,
+                    "description": description,
+                    "level": level,
+                    "lessons": []
+                }
+            },
+        )
+    else:
+        # Даём Mongo самому сгенерировать _id
+        insert_result = await courses_coll.insert_one(
+            {
+                "slug": slug,
+                "title": title,
+                "description": description,
+                "level": level,
+                "lessons": []
             }
         )
+        mongo_course_id = str(insert_result.inserted_id)
+
+
+
+    # 2) Postgres: upsert по mongo_course_id
+    course_row = await CourseRepository.upsert_by_mongo_id(
+        session=session,
+        mongo_course_id=mongo_course_id,
+        title=title,
+        description=description,
+        level=level,
+    )
 
     await session.commit()
     return {
         "status": "ok",
-        "count": len(result_payload),
-        "courses": result_payload,
+        "count": 1,
+        "courses": [
+            {
+                "mongo_course_id": mongo_course_id,
+                "pg_course_id": course_row.id,
+            }
+        ],
     }
 
 
