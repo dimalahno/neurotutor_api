@@ -11,6 +11,10 @@ router = APIRouter(prefix="/content", tags=["content"], )
 
 @router.get("/courses")
 async def list_courses() -> List[Dict[str, Any]]:
+    """
+    Получить список курсов
+    :return: список курсов
+    """
     cursor = mongo_db["courses"].find({})
     courses = await cursor.to_list(length=1000)
     return jsonable_encoder(courses, custom_encoder={ObjectId: str})
@@ -18,6 +22,11 @@ async def list_courses() -> List[Dict[str, Any]]:
 
 @router.get("/courses/{course_id}")
 async def get_course(course_id: str) -> Dict[str, Any]:
+    """
+    Получить курс по _id
+    :param course_id: идентификатор
+    :return: Данные курса
+    """
     # Конвертация str → ObjectId
     try:
         oid = ObjectId(course_id)
@@ -35,16 +44,30 @@ async def get_course(course_id: str) -> Dict[str, Any]:
         )
     return jsonable_encoder(course, custom_encoder={ObjectId: str})
 
-
-@router.get("/lessons")
-async def list_lessons() -> List[Dict[str, Any]]:
-    cursor = mongo_db["lessons"].find({})
-    lessons = await cursor.to_list(length=1000)
-    return jsonable_encoder(lessons, custom_encoder={ObjectId: str})
+@router.get("/courses/{slug}")
+async def get_course_by_slug(slug: str) -> Dict[str, Any]:
+    """
+    Получить курс по slug
+    :param slug:
+    :return: Данные курса
+    """
+    course = await mongo_db["courses"].find_one({"slug": slug})
+    if not course:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Course not found",
+        )
+    return jsonable_encoder(course, custom_encoder={ObjectId: str})
 
 
 @router.get("/lessons/{lesson_id}")
 async def get_lesson(lesson_id: str) -> Dict[str, Any]:
+    """
+    Получить контент урока по id
+    :param lesson_id: идентификатор урока
+    :return: Контент урока
+    """
+
     # Конвертация str → ObjectId
     try:
         oid = ObjectId(lesson_id)
