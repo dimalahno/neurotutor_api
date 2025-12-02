@@ -20,7 +20,7 @@ async def list_courses() -> List[Dict[str, Any]]:
     return jsonable_encoder(courses, custom_encoder={ObjectId: str})
 
 
-@router.get("/courses/{course_id}")
+@router.get("/courses/id/{course_id}")
 async def get_course(course_id: str) -> Dict[str, Any]:
     """
     Получить курс по _id
@@ -44,7 +44,7 @@ async def get_course(course_id: str) -> Dict[str, Any]:
         )
     return jsonable_encoder(course, custom_encoder={ObjectId: str})
 
-@router.get("/courses/{slug}")
+@router.get("/courses/slug/{slug}")
 async def get_course_by_slug(slug: str) -> Dict[str, Any]:
     """
     Получить курс по slug

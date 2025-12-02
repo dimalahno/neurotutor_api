@@ -2,6 +2,7 @@ import logging
 
 import uvicorn
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 
 from app.config.exception_handlers_cfg import register_exception_handlers
 from app.config.logger_cfg import setup_logging
@@ -14,6 +15,19 @@ setup_logging()
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="NeuroTutor API")
+
+# Разрешаем запросы с фронта
+origins = [
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Middlewares
 app.middleware("http")(log_requests)
