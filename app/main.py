@@ -24,12 +24,6 @@ app.include_router(users.router)
 app.include_router(content_admin.router)
 app.include_router(content.router)
 
-
-@app.get("/health")
-async def health_check():
-    return {"status": "ok"}
-
-
 # Обработчики ошибок
 register_exception_handlers(app)
 
