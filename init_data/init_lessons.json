@@ -180,8 +180,8 @@
           "prompt": "Match the tech job to its description.",
           "items": [
             {
-              "left": "UX writer",
-              "rightOptions": [
+              "question": "UX writer",
+              "options": [
                 "Creates the texts that appear in the interface of websites and apps.",
                 "Oversees code releases and deployments.",
                 "Builds applications based on blockchain architecture."
@@ -189,8 +189,8 @@
               "correctIndex": 0
             },
             {
-              "left": "data scientist",
-              "rightOptions": [
+              "question": "data scientist",
+              "options": [
                 "Collects and analyses large data sets.",
                 "Designs and develops websites and web applications.",
                 "Helps shorten development time."
@@ -198,8 +198,8 @@
               "correctIndex": 0
             },
             {
-              "left": "web developer",
-              "rightOptions": [
+              "question": "web developer",
+              "options": [
                 "Builds applications based on blockchain architecture.",
                 "Designs and develops websites and web applications.",
                 "Creates the text that users see inside apps."
@@ -207,8 +207,8 @@
               "correctIndex": 1
             },
             {
-              "left": "DevOps engineer",
-              "rightOptions": [
+              "question": "DevOps engineer",
+              "options": [
                 "Oversees code releases and optimizes development process.",
                 "Collects, stores and analyses user data.",
                 "Writes the text for buttons and error messages."
@@ -216,8 +216,8 @@
               "correctIndex": 0
             },
             {
-              "left": "blockchain developer",
-              "rightOptions": [
+              "question": "blockchain developer",
+              "options": [
                 "Builds applications based on blockchain architecture or protocols.",
                 "Helps users solve technical problems.",
                 "Tests software to find bugs."
@@ -283,8 +283,8 @@
           "prompt": "Match the adjectives from the article to their opposites.",
           "items": [
             {
-              "left": "cost-efficient",
-              "rightOptions": [
+              "question": "cost-efficient",
+              "options": [
                 "wasteful",
                 "secretive",
                 "lengthy"
@@ -292,8 +292,8 @@
               "correctIndex": 0
             },
             {
-              "left": "transparent",
-              "rightOptions": [
+              "question": "transparent",
+              "options": [
                 "unclear",
                 "secretive",
                 "shaky"
@@ -301,8 +301,8 @@
               "correctIndex": 1
             },
             {
-              "left": "solid",
-              "rightOptions": [
+              "question": "solid",
+              "options": [
                 "lengthy",
                 "wasteful",
                 "shaky"
@@ -310,8 +310,8 @@
               "correctIndex": 2
             },
             {
-              "left": "clear",
-              "rightOptions": [
+              "question": "clear",
+              "options": [
                 "unclear",
                 "secretive",
                 "wasteful"
@@ -319,8 +319,8 @@
               "correctIndex": 0
             },
             {
-              "left": "concise",
-              "rightOptions": [
+              "question": "concise",
+              "options": [
                 "lengthy",
                 "shaky",
                 "secretive"
@@ -341,8 +341,8 @@
           "prompt": "Match the words from the article with their definitions.",
           "items": [
             {
-              "left": "encounter",
-              "rightOptions": [
+              "question": "encounter",
+              "options": [
                 "come across or experience something",
                 "expert knowledge and skills",
                 "the way you progress in your work"
@@ -350,8 +350,8 @@
               "correctIndex": 0
             },
             {
-              "left": "career path",
-              "rightOptions": [
+              "question": "career path",
+              "options": [
                 "fundamental",
                 "the way you progress in your work",
                 "in a few words"
@@ -359,8 +359,8 @@
               "correctIndex": 1
             },
             {
-              "left": "stakeholders",
-              "rightOptions": [
+              "question": "stakeholders",
+              "options": [
                 "people who have an interest in a certain business",
                 "from the very beginning",
                 "nowadays"
@@ -368,8 +368,8 @@
               "correctIndex": 0
             },
             {
-              "left": "expertise",
-              "rightOptions": [
+              "question": "expertise",
+              "options": [
                 "expert knowledge and skills",
                 "a wide variety",
                 "make something more effective"
@@ -377,8 +377,8 @@
               "correctIndex": 0
             },
             {
-              "left": "broad range",
-              "rightOptions": [
+              "question": "broad range",
+              "options": [
                 "fundamental",
                 "a wide variety",
                 "in a few words"
@@ -386,8 +386,8 @@
               "correctIndex": 1
             },
             {
-              "left": "from scratch",
-              "rightOptions": [
+              "question": "from scratch",
+              "options": [
                 "from the very beginning",
                 "nowadays",
                 "in spite of"
@@ -395,8 +395,8 @@
               "correctIndex": 0
             },
             {
-              "left": "optimize",
-              "rightOptions": [
+              "question": "optimize",
+              "options": [
                 "make something more effective",
                 "come across or experience something",
                 "expert knowledge and skills"
@@ -404,8 +404,8 @@
               "correctIndex": 0
             },
             {
-              "left": "these days",
-              "rightOptions": [
+              "question": "these days",
+              "options": [
                 "nowadays",
                 "fundamental",
                 "in a few words"
@@ -413,8 +413,8 @@
               "correctIndex": 0
             },
             {
-              "left": "in a nutshell",
-              "rightOptions": [
+              "question": "in a nutshell",
+              "options": [
                 "in a few words",
                 "in spite of",
                 "from the very beginning"
@@ -422,8 +422,8 @@
               "correctIndex": 0
             },
             {
-              "left": "despite",
-              "rightOptions": [
+              "question": "despite",
+              "options": [
                 "in spite of",
                 "fundamental",
                 "nowadays"
@@ -431,8 +431,8 @@
               "correctIndex": 0
             },
             {
-              "left": "core",
-              "rightOptions": [
+              "question": "core",
+              "options": [
                 "fundamental",
                 "a wide variety",
                 "in a few words"
