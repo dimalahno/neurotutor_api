@@ -194,3 +194,74 @@ async def upload_lessons(
         "course_id": course_id,
         "mongo_course_id": mongo_course_id,
     }
+
+@router.post("/update-lesson/{course_id}/{lesson_id}")
+async def update_lesson(
+    course_id: str,
+    lesson_id: str,
+    file: UploadFile = File(...)
+):
+    """
+    Обновление урока в MongoDB:
+    1) Проверяем курс по course_id
+    2) Проверяем урок по lesson_id
+    3) Обновляем документ урока целиком ($set)
+    4) Обновляем метаданные урока в courses.lessons[]
+    """
+    data = await _read_json_file(file)
+    if not isinstance(data, dict):
+        raise HTTPException(
+            status_code=400,
+            detail="JSON must be a single object",
+        )
+
+    lessons_coll = mongo_db["lessons"]
+    courses_coll = mongo_db["courses"]
+
+    # Validate ObjectId
+    try:
+        course_obj_id = ObjectId(course_id)
+        lesson_obj_id = ObjectId(lesson_id)
+    except:
+        raise HTTPException(status_code=400, detail="Invalid Mongo ObjectId")
+
+    # --- Проверяем курс ---
+    course_doc = await courses_coll.find_one({"_id": course_obj_id})
+    if not course_doc:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    # --- Проверяем урок ---
+    lesson_doc = await lessons_coll.find_one({"_id": lesson_obj_id})
+    if not lesson_doc:
+        raise HTTPException(status_code=404, detail="Lesson not found")
+
+    # --- Обновляем lesson ---
+    # Обязательно перезаписываем mongo_course_id для целостности
+    data["mongo_course_id"] = course_id
+
+    await lessons_coll.update_one(
+        {"_id": lesson_obj_id},
+        {"$set": data}
+    )
+
+    # --- Обновляем метаданные в courses.lessons[] ---
+    index = data.get("index")
+    title = data.get("title")
+
+    # Обновить объект в массиве lessons курса
+    await courses_coll.update_one(
+        {"_id": course_obj_id, "lessons.lesson_id": lesson_id},
+        {
+            "$set": {
+                "lessons.$.index": index,
+                "lessons.$.title": title,
+            }
+        }
+    )
+
+    return {
+        "status": "ok",
+        "lesson_id": lesson_id,
+        "course_id": course_id,
+        "updated_fields": ["lesson document", "course.lessons[] metadata"]
+    }
