@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, Form, Depends, HTTPException
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response
 from sqlalchemy.orm import Session
 
 from app.config.db_cfg import get_db
@@ -36,8 +36,12 @@ def download_file(
     if not db_obj:
         raise HTTPException(status_code=404, detail="File not found")
 
-    return StreamingResponse(
+    media_type = db_obj.mime_type
+
+    return Response(
         content=content,
-        media_type=db_obj.mime_type,
-        headers={"Content-Disposition": f'attachment; filename="{db_obj.file_name}"'}
+        media_type=media_type,
+        headers={
+            "Content-Disposition": f'inline; filename="{db_obj.file_name}"'
+        },
     )

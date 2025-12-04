@@ -24,7 +24,7 @@ class LessonFilesService:
         size = len(content)
         mime = file.content_type
 
-        key = file.filename  # MVP — имя файла как ключ
+        key = f"{course_slug}/{lesson_slug}/{file.filename}"
 
         db_obj = self.repo.create(
             db,
