@@ -202,12 +202,13 @@ async def update_lesson(
     file: UploadFile = File(...)
 ):
     """
-    Обновление урока в MongoDB:
-    1) Проверяем курс по course_id
-    2) Проверяем урок по lesson_id
-    3) Обновляем документ урока целиком ($set)
-    4) Обновляем метаданные урока в courses.lessons[]
+    Обновление урока в MongoDB
+    :param course_id: ID курса MongoDB
+    :param lesson_id: ID урока MongoDB
+    :param file: файл урока JSON
+    :return: статус обновления
     """
+
     data = await _read_json_file(file)
     if not isinstance(data, dict):
         raise HTTPException(

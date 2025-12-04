@@ -594,7 +594,7 @@
             }
           ]
         },
-        "audioUrl": "track_1_1",
+        "audioUrl": "track_1_1.mp3",
         "glossary": [
           {
             "word": "transparent",
@@ -1142,7 +1142,7 @@
         {
           "id": "pronunciation_list_01",
           "type": "listen_and_repeat",
-          "audioUrl": "track_1_2",
+          "audioUrl": "track_1_2.mp3",
           "wordList": [
             "software developer",
             "QA engineer",
@@ -1205,17 +1205,17 @@
           "tracks": [
             {
               "trackId": "track_1_3",
-              "audioUrl": "track_1_3",
+              "audioUrl": "track_1_3.mp3",
               "title": "Dialogue 1"
             },
             {
               "trackId": "track_1_4",
-              "audioUrl": "track_1_4",
+              "audioUrl": "track_1_4.mp3",
               "title": "Dialogue 2"
             },
             {
               "trackId": "track_1_5",
-              "audioUrl": "track_1_5",
+              "audioUrl": "track_1_5.mp3",
               "title": "Dialogue 3"
             }
           ],
