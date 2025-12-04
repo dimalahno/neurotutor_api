@@ -381,11 +381,8 @@ create table lessons_files
     file_path   varchar(256),
     file_size   bigint,
     mime_type   varchar(256),
-    state       numeric(1)  default 1,
-    lesson_id   varchar(64),
-    unit_id     varchar(64),
-    activity_id varchar(64),
-    media_type  varchar(16),
+    course_slug   varchar(64),
+    lesson_slug   varchar(64),
     created_at  timestamptz default now() not null,
     updated_at  timestamptz default now() not null
 );
@@ -396,15 +393,11 @@ comment on column lessons_files.file_name is 'Имя файла';
 comment on column lessons_files.file_path is 'Путь к файлу в хранилище';
 comment on column lessons_files.file_size is 'Размер файла';
 comment on column lessons_files.mime_type is 'MediaType';
-comment on column lessons_files.state is 'Состояние';
-comment on column lessons_files.lesson_id is 'Идентификатор урока в MongoDB, к которому относится файл';
-comment on column lessons_files.unit_id is 'Идентификатор unit в структуре урока (для привязки файла)';
-comment on column lessons_files.activity_id is 'Идентификатор activity/упражнения, для которого используется файл';
-comment on column lessons_files.media_type is 'Тип медиа (например, audio, video, image, document)';
+comment on column lessons_files.course_slug is 'Slug курса в MongoDB, к которому относится файл';
+comment on column lessons_files.lesson_slug is 'Slug урока в MongoDB, к которому относится файл';
 comment on column lessons_files.created_at is 'Дата создания';
 comment on column lessons_files.updated_at is 'Дата обновления';
 
-create index idx_lessons_files_lesson on lessons_files (lesson_id);
 create index idx_lessons_files_file_name on lessons_files (file_name);
 
 CREATE TRIGGER trg_lessons_files_set_updated_at

@@ -1,7 +1,6 @@
+from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
-
-from pydantic import BaseModel
 
 
 class LessonFileBase(BaseModel):
@@ -9,18 +8,16 @@ class LessonFileBase(BaseModel):
     file_path: Optional[str] = None
     file_size: Optional[int] = None
     mime_type: Optional[str] = None
-    state: Optional[int] = 1
-    lesson_id: Optional[str] = None
-    unit_id: Optional[str] = None
-    activity_id: Optional[str] = None
-    media_type: Optional[str] = None
+
+    course_slug: Optional[str] = None
+    lesson_slug: Optional[str] = None
 
 
 class LessonFileCreate(LessonFileBase):
     file_name: str
     file_path: str
-    media_type: str
-    lesson_id: str
+    course_slug: str
+    lesson_slug: str
 
 
 class LessonFileUpdate(BaseModel):
@@ -28,25 +25,24 @@ class LessonFileUpdate(BaseModel):
     file_path: Optional[str] = None
     file_size: Optional[int] = None
     mime_type: Optional[str] = None
-    state: Optional[int] = None
-    lesson_id: Optional[str] = None
-    unit_id: Optional[str] = None
-    activity_id: Optional[str] = None
-    media_type: Optional[str] = None
+    course_slug: Optional[str] = None
+    lesson_slug: Optional[str] = None
 
 
-class LessonFileInDBBase(LessonFileBase):
+class LessonFileInDB(BaseModel):
     id: int
+    file_name: str
+    file_path: str
+    file_size: Optional[int]
+    mime_type: Optional[str]
+    course_slug: Optional[str]
+    lesson_slug: Optional[str]
     created_at: datetime
     updated_at: datetime
 
     class Config:
-        from_attributes = True  # Pydantic v2 (аналог orm_mode=True)
+        from_attributes = True
 
 
-class LessonFile(LessonFileInDBBase):
-    pass
-
-
-class LessonFileInDB(LessonFileInDBBase):
+class LessonFile(LessonFileInDB):
     pass
