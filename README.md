@@ -72,6 +72,11 @@ docker compose ps
 ```
 docker compose build --no-cache
 ```
+- Посмотреть логи
+```
+docker compose logs --tail=50 {docker_container_name}
+docker compose logs --tail=50 api
+```
 
 # Доступ к установленным контейнерам
 - Postgres: Используем PgAdmin
