@@ -55,17 +55,22 @@ wsl --list --verbose
 
 Перейдите в директорию neurotutor_api
 
-Запустить:
+- Запустить:
 ```
 docker compose up -d
 ```
-Остановить:
+- Остановить:
 ```
 docker compose down
+docker compose down -v
 ```
-Проверить состояние контейнеров:
+- Проверить состояние контейнеров:
 ```
 docker compose ps
+```
+- Пересобрать контейнер
+```
+docker compose build --no-cache
 ```
 
 # Доступ к установленным контейнерам
@@ -132,3 +137,5 @@ uvicorn main:app --reload
 2. Откройте Query Tool
 3. Загрузите файл app\ini_data\init_db.sql
 4. Выполните скрипт для создания таблиц и начальных данных
+
+
