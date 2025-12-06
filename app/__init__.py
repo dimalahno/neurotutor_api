@@ -7,6 +7,13 @@ from .models import Base, engine, Course, Enrollment, UserProgress
 from .schemas import CourseCreate, CourseOut, EnrollmentCreate, EnrollmentOut, UserProgressCreate, UserProgressOut
 from .repositories import CourseRepository, EnrollmentRepository, UserProgressRepository
 
+from fastapi import FastAPI
+from app.routers import router as user_router
+
+app = FastAPI()
+
+app.include_router(user_router)
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="NeuroTutor API - Courses, Enrollments, Progress")
