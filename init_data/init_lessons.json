@@ -828,6 +828,9 @@
                 "developer",
                 "."
               ],
+              "inputType": [
+                "text"
+              ],
               "solution": "Paul wants to become a software developer."
             },
             {
@@ -842,6 +845,9 @@
                 "process",
                 "?"
               ],
+              "inputType": [
+                "text"
+              ],
               "solution": "Does Laura know how to optimize this process?"
             },
             {
@@ -855,6 +861,9 @@
                 "time",
                 "."
               ],
+              "inputType": [
+                "text"
+              ],
               "solution": "He isn't sure he needs more time."
             },
             {
@@ -867,6 +876,9 @@
                 "this",
                 "company",
                 "?"
+              ],
+              "inputType": [
+                "text"
               ],
               "solution": "What is the name of this company?"
             }
