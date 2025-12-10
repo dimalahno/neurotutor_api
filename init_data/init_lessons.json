@@ -230,9 +230,6 @@
               "correctIndex": 0
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -275,9 +272,6 @@
               "correct": "keep up with"
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -333,9 +327,6 @@
               "correctIndex": 0
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -445,9 +436,6 @@
               "correctIndex": 0
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -660,9 +648,6 @@
               "correctIndex": 1
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -674,9 +659,6 @@
           "inputType": [
             "text"
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "short_answer_check",
@@ -696,9 +678,6 @@
           "inputType": [
             "text"
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "short_answer_check",
@@ -754,9 +733,6 @@
               "correct": "are working"
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -805,9 +781,6 @@
             ]
           },
           "instruction": "Remember: we add -s in the third person singular (he/she/it). For verbs ending in -sh, -tch or -ss we add -es. For verbs ending in consonant + -y we change -y to -ies.",
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -883,9 +856,6 @@
               "solution": "What is the name of this company?"
             }
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -912,9 +882,6 @@
               "correct": "does not like"
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -965,9 +932,6 @@
               "correct": "Does he like"
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -1016,9 +980,6 @@
             ]
           },
           "instruction": "To form Present Continuous, use am/is/are + verb-ing.",
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -1069,9 +1030,6 @@
               "correct": "is selling"
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -1110,9 +1068,6 @@
               "correct": "They aren’t trying to find a new job at the moment."
             }
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "short_answer_check",
@@ -1131,9 +1086,6 @@
           "inputType": [
             "text"
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "writing_feedback",
@@ -1150,9 +1102,6 @@
           "id": "grammar_llm_adaptive_01",
           "type": "llm_adaptive",
           "prompt": "Generate extra practice based on student mistakes.",
-          "autoCheck": {
-            "type": "llm_generated"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "adaptive_grammar_tutor",
@@ -1211,9 +1160,6 @@
             "audio"
           ],
           "prompt": "Record yourself saying at least ten tech job titles from the list.",
-          "autoCheck": {
-            "type": "asr_phoneme_scorer"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "pronunciation_feedback_text",
@@ -1284,9 +1230,6 @@
               "correctIndex": 2
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -1294,7 +1237,6 @@
         {
           "id": "speaking_roleplay_01",
           "type": "roleplay",
-          "scenario": "tech_meetup",
           "prompt": "Imagine you are at a tech meetup. Introduce yourself and talk about your job or the job you want in tech.",
           "turns": [
             {
@@ -1405,9 +1347,6 @@
               "type": "end"
             }
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "conversational_partner",
@@ -1443,9 +1382,6 @@
           "inputType": [
             "text"
           ],
-          "autoCheck": {
-            "type": "none"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "writing_feedback",
@@ -1547,9 +1483,6 @@
               "correctIndex": 0
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -1632,9 +1565,6 @@
               "correctIndex": 1
             }
           ],
-          "autoCheck": {
-            "type": "rule_based"
-          },
           "llmCheck": {
             "enabled": false
           }
@@ -1643,9 +1573,6 @@
           "id": "quiz_summary_llm_01",
           "type": "llm_summary_feedback",
           "prompt": "Generate a short summary of the student's performance in Lesson 1.",
-          "autoCheck": {
-            "type": "llm_generated"
-          },
           "llmCheck": {
             "enabled": true,
             "mode": "lesson_summary_feedback",
