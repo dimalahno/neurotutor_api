@@ -40,16 +40,15 @@
         {
           "id": "warmup_speaking_01",
           "type": "speaking_prompt",
-          "inputType": [
-            "audio",
-            "text"
-          ],
           "show_question_mode": "sequential",
           "questions": [
             {
               "id": "q1",
               "prompt": "What do you do now?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I work as a frontend developer in a small company.",
               "targetPatterns": [
                 "I work as a ...",
@@ -64,7 +63,10 @@
             {
               "id": "q2",
               "prompt": "Do you want to work in IT? Why or why not?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "Yes, I want to work in IT because I like solving problems with technology.",
               "targetPatterns": [
                 "I want to ... because ...",
@@ -74,7 +76,10 @@
             {
               "id": "q3",
               "prompt": "Which IT jobs do you know?",
-              "expectedAnswerType": "listing",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I know software developer, QA engineer and data scientist.",
               "keywords": [
                 "software developer",
@@ -450,16 +455,15 @@
         {
           "id": "vocab_speaking_questions_01",
           "type": "speaking_prompt",
-          "inputType": [
-            "audio",
-            "text"
-          ],
           "show_question_mode": "sequential",
           "questions": [
             {
               "id": "q1",
               "prompt": "How do you keep up with what’s going on in the world?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I keep up with the world by reading news websites and following experts on social media.",
               "targetPatterns": [
                 "I keep up with ... by ...",
@@ -475,7 +479,10 @@
             {
               "id": "q2",
               "prompt": "How much time do you think it takes to learn a new skill from scratch?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I think it takes several months to learn a new skill from scratch.",
               "targetPatterns": [
                 "I think it takes ... to ...",
@@ -491,7 +498,10 @@
             {
               "id": "q3",
               "prompt": "Are you normally concise when you speak?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "Yes, I try to be concise when I speak because it helps others understand me faster.",
               "targetPatterns": [
                 "Yes, I try to be ...",
@@ -506,7 +516,10 @@
             {
               "id": "q4",
               "prompt": "What are some things you have a solid understanding of?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I have a solid understanding of programming basics and data analysis.",
               "targetPatterns": [
                 "I have a solid understanding of ...",
@@ -521,7 +534,10 @@
             {
               "id": "q5",
               "prompt": "Which of these 5 jobs is the hardest to do? Which is the easiest? Why?",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I think the hardest job is a software architect because it requires deep knowledge and responsibility. The easiest is a junior support specialist because the tasks are more basic.",
               "targetPatterns": [
                 "I think the hardest job is ... because ...",
@@ -655,7 +671,7 @@
           "id": "reading_vocab_from_scratch_01",
           "type": "open_answer",
           "prompt": "In your own words, what does the expression \"from scratch\" mean in the text?",
-          "inputType": "text",
+          "inputType": ["text"],
           "autoCheck": {
             "type": "none"
           },
@@ -675,7 +691,7 @@
           "id": "reading_open_01",
           "type": "open_answer",
           "prompt": "In your own words, why do many companies want to use blockchain technology?",
-          "inputType": "text",
+          "inputType": ["text"],
           "autoCheck": {
             "type": "none"
           },
@@ -1096,7 +1112,7 @@
           "id": "grammar_free_production_01",
           "type": "open_answer",
           "prompt": "Describe your typical working day and then make three sentences about what is different this week or this month.",
-          "inputType": "text",
+          "inputType": ["text"],
           "autoCheck": {
             "type": "none"
           },
@@ -1173,7 +1189,7 @@
         {
           "id": "pronunciation_speaking_01",
           "type": "speaking_prompt",
-          "inputType": "audio",
+          "inputType": ["audio"],
           "prompt": "Record yourself saying at least ten tech job titles from the list.",
           "autoCheck": {
             "type": "asr_phoneme_scorer"
@@ -1259,10 +1275,6 @@
           "id": "speaking_roleplay_01",
           "type": "roleplay",
           "scenario": "tech_meetup",
-          "inputType": [
-            "audio",
-            "text"
-          ],
           "prompt": "Imagine you are at a tech meetup. Introduce yourself and talk about your job or the job you want in tech.",
           "turns": [
             {
@@ -1275,7 +1287,10 @@
               "id": "a1",
               "role": "student",
               "type": "answer",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "Hi, my name is Alex.",
               "targetPatterns": [
                 "My name is ...",
@@ -1295,7 +1310,10 @@
               "id": "a2",
               "role": "student",
               "type": "answer",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I work as a software developer.",
               "targetPatterns": [
                 "I work as ...",
@@ -1316,7 +1334,10 @@
               "id": "a3",
               "role": "student",
               "type": "answer",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I'm working on a mobile app for my company.",
               "targetPatterns": [
                 "I'm working on ...",
@@ -1337,7 +1358,10 @@
               "id": "a4",
               "role": "student",
               "type": "answer",
-              "expectedAnswerType": "short_free_speech",
+              "inputType": [
+                "audio",
+                "text"
+              ],
               "modelAnswer": "I'm interested in tech because I enjoy solving problems.",
               "targetPatterns": [
                 "I'm interested in ... because ...",
@@ -1396,7 +1420,7 @@
             "Step 2: Identify a problem and explain how you solve it.",
             "Step 3: Wrap up with a call to action (how people can work with you or contact you)."
           ],
-          "inputType": "text",
+          "inputType": ["text"],
           "autoCheck": {
             "type": "none"
           },
