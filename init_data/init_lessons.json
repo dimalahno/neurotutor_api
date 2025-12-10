@@ -671,7 +671,9 @@
           "id": "reading_vocab_from_scratch_01",
           "type": "open_answer",
           "prompt": "In your own words, what does the expression \"from scratch\" mean in the text?",
-          "inputType": ["text"],
+          "inputType": [
+            "text"
+          ],
           "autoCheck": {
             "type": "none"
           },
@@ -691,7 +693,9 @@
           "id": "reading_open_01",
           "type": "open_answer",
           "prompt": "In your own words, why do many companies want to use blockchain technology?",
-          "inputType": ["text"],
+          "inputType": [
+            "text"
+          ],
           "autoCheck": {
             "type": "none"
           },
@@ -1112,7 +1116,9 @@
           "id": "grammar_free_production_01",
           "type": "open_answer",
           "prompt": "Describe your typical working day and then make three sentences about what is different this week or this month.",
-          "inputType": ["text"],
+          "inputType": [
+            "text"
+          ],
           "autoCheck": {
             "type": "none"
           },
@@ -1189,7 +1195,9 @@
         {
           "id": "pronunciation_speaking_01",
           "type": "speaking_prompt",
-          "inputType": ["audio"],
+          "inputType": [
+            "audio"
+          ],
           "prompt": "Record yourself saying at least ten tech job titles from the list.",
           "autoCheck": {
             "type": "asr_phoneme_scorer"
@@ -1414,13 +1422,15 @@
         {
           "id": "writing_pitch_01",
           "type": "open_answer",
-          "prompt": "Write your elevator pitch (4–6 sentences) about your current or future job in tech. Follow these steps: 1) Say who you are and what you do. 2) Identify a problem you can solve and explain how you solve it. 3) Finish with a call to action (for example, how people can contact you).",
+          "prompt": "Write your elevator pitch (4–6 sentences) about your current or future job in tech. Follow these steps: ",
           "guidelines": [
             "Step 1: Who you are and what you do. Example: \"My name is ... and I’m a ...\"",
-            "Step 2: Identify a problem and explain how you solve it.",
+            "Step 2: Identify a problem you can solve and explain how you solve it.",
             "Step 3: Wrap up with a call to action (how people can work with you or contact you)."
           ],
-          "inputType": ["text"],
+          "inputType": [
+            "text"
+          ],
           "autoCheck": {
             "type": "none"
           },
