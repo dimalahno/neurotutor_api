@@ -1040,31 +1040,31 @@
           "prompt": "Correct the mistakes in the sentences.",
           "items": [
             {
-              "incorrect": "I listen to you. Please continue.",
+              "sentence": "I listen to you. Please continue.",
               "correct": "I am listening to you. Please continue."
             },
             {
-              "incorrect": "I am seeing my friends every Friday.",
+              "sentence": "I am seeing my friends every Friday.",
               "correct": "I see my friends every Friday."
             },
             {
-              "incorrect": "Are you knowing Emily?",
+              "sentence": "Are you knowing Emily?",
               "correct": "Do you know Emily?"
             },
             {
-              "incorrect": "Jack talks to his team lead right now so I can’t ask him.",
+              "sentence": "Jack talks to his team lead right now so I can’t ask him.",
               "correct": "Jack is talking to his team lead right now so I can’t ask him."
             },
             {
-              "incorrect": "I’m not needing any assistance at the moment, but thank you.",
+              "sentence": "I’m not needing any assistance at the moment, but thank you.",
               "correct": "I don’t need any assistance at the moment, but thank you."
             },
             {
-              "incorrect": "Smells delicious. What do you cook?",
+              "sentence": "Smells delicious. What do you cook?",
               "correct": "It smells delicious. What are you cooking?"
             },
             {
-              "incorrect": "They don’t try to find a new job at the moment.",
+              "sentence": "They don’t try to find a new job at the moment.",
               "correct": "They aren’t trying to find a new job at the moment."
             }
           ],
@@ -1126,28 +1126,112 @@
           "id": "pronunciation_list_01",
           "type": "listen_and_repeat",
           "audioUrl": "track_1_2.mp3",
-          "wordList": [
-            "software developer",
-            "QA engineer",
-            "DevOps engineer",
-            "data scientist",
-            "UX writer",
-            "frontend developer",
-            "backend developer",
-            "product manager",
-            "project manager",
-            "support engineer",
-            "architect",
-            "DevOps",
-            "business analyst",
-            "machine learning expert",
-            "programmer",
-            "UI/UX designer",
-            "marketer",
-            "marketing specialist",
-            "CEO",
-            "CTO",
-            "COO"
+          "words": [
+            {
+              "term": "software developer",
+              "translation": "разработчик ПО",
+              "transcript": "ˈsɒftweə dɪˈveləpə"
+            },
+            {
+              "term": "QA engineer",
+              "translation": "инженер по качеству",
+              "transcript": "ˌkjuːˈeɪ ˌendʒɪˈnɪə"
+            },
+            {
+              "term": "DevOps engineer",
+              "translation": "DevOps-инженер",
+              "transcript": "ˈdevɒps ˌendʒɪˈnɪə"
+            },
+            {
+              "term": "data scientist",
+              "translation": "специалист по данным",
+              "transcript": "ˈdeɪtə ˈsaɪəntɪst"
+            },
+            {
+              "term": "UX writer",
+              "translation": "UX-райтер",
+              "transcript": "ˌjuːˈeks ˈraɪtə"
+            },
+            {
+              "term": "frontend developer",
+              "translation": "фронтенд-разработчик",
+              "transcript": "ˌfrʌntˈend dɪˈveləpə"
+            },
+            {
+              "term": "backend developer",
+              "translation": "бекенд-разработчик",
+              "transcript": "ˌbækˈend dɪˈveləpə"
+            },
+            {
+              "term": "product manager",
+              "translation": "продуктовый менеджер",
+              "transcript": "ˈprɒdʌkt ˈmænɪdʒə"
+            },
+            {
+              "term": "project manager",
+              "translation": "проектный менеджер",
+              "transcript": "ˈprɒdʒekt ˈmænɪdʒə"
+            },
+            {
+              "term": "support engineer",
+              "translation": "инженер поддержки",
+              "transcript": "səˈpɔːt ˌendʒɪˈnɪə"
+            },
+            {
+              "term": "architect",
+              "translation": "архитектор",
+              "transcript": "ˈɑːkɪtekt"
+            },
+            {
+              "term": "DevOps",
+              "translation": "DevOps-специалист",
+              "transcript": "ˈdevɒps"
+            },
+            {
+              "term": "business analyst",
+              "translation": "бизнес-аналитик",
+              "transcript": "ˈbɪznəs ˈænəlɪst"
+            },
+            {
+              "term": "machine learning expert",
+              "translation": "эксперт по машинному обучению",
+              "transcript": "məˈʃiːn ˈlɜːnɪŋ ˈekspɜːt"
+            },
+            {
+              "term": "programmer",
+              "translation": "программист",
+              "transcript": "ˈprəʊɡræmə"
+            },
+            {
+              "term": "UI/UX designer",
+              "translation": "UI/UX-дизайнер",
+              "transcript": "ˌjuːˈaɪ ˌjuːˈeks dɪˈzaɪnə"
+            },
+            {
+              "term": "marketer",
+              "translation": "маркетолог",
+              "transcript": "ˈmɑːkɪtə"
+            },
+            {
+              "term": "marketing specialist",
+              "translation": "специалист по маркетингу",
+              "transcript": "ˈmɑːkɪtɪŋ ˈspeʃəlɪst"
+            },
+            {
+              "term": "CEO",
+              "translation": "генеральный директор",
+              "transcript": "ˌsiː.iːˈəʊ"
+            },
+            {
+              "term": "CTO",
+              "translation": "технический директор",
+              "transcript": "ˌsiː.tiːˈəʊ"
+            },
+            {
+              "term": "COO",
+              "translation": "операционный директор",
+              "transcript": "ˌsiː.əʊˈəʊ"
+            }
           ],
           "llmCheck": {
             "enabled": false
