@@ -804,7 +804,7 @@
               "inputType": [
                 "text"
               ],
-              "solution": "Paul wants to become a software developer."
+              "correct": "Paul wants to become a software developer."
             },
             {
               "words": [
@@ -821,7 +821,7 @@
               "inputType": [
                 "text"
               ],
-              "solution": "Does Laura know how to optimize this process?"
+              "correct": "Does Laura know how to optimize this process?"
             },
             {
               "words": [
@@ -837,7 +837,7 @@
               "inputType": [
                 "text"
               ],
-              "solution": "He isn't sure he needs more time."
+              "correct": "He isn't sure he needs more time."
             },
             {
               "words": [
@@ -853,7 +853,7 @@
               "inputType": [
                 "text"
               ],
-              "solution": "What is the name of this company?"
+              "correct": "What is the name of this company?"
             }
           ],
           "llmCheck": {
