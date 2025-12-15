@@ -46,8 +46,7 @@
               "id": "q1",
               "prompt": "What do you do now?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "I work as a frontend developer in a small company.",
               "targetPatterns": [
@@ -64,8 +63,7 @@
               "id": "q2",
               "prompt": "Do you want to work in IT? Why or why not?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "Yes, I want to work in IT because I like solving problems with technology.",
               "targetPatterns": [
@@ -77,8 +75,7 @@
               "id": "q3",
               "prompt": "Which IT jobs do you know?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "I know software developer, QA engineer and data scientist.",
               "keywords": [
@@ -90,8 +87,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "diagnostic_speaking",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are an English teacher for IT students. Analyze the student's answer about their job and IT interests. 1) Give a CEFR-like level estimate (A2/B1/B2) with one sentence justification. 2) Point out up to 3 typical grammar mistakes, especially with present tenses. 3) Suggest 2 simple tips for improvement. Answer in simple English.",
             "scoringDimensions": [
               "fluency",
@@ -174,10 +169,7 @@
               "definition": "A person who helps users solve technical problems.",
               "example": "The support engineer answers customers’ questions by email."
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "vocab_matching_jobs_01",
@@ -229,10 +221,7 @@
               ],
               "correctIndex": 0
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "vocab_collocations_01",
@@ -271,10 +260,7 @@
               "sentence": "Developers must ______ industry changes.",
               "correct": "keep up with"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "vocab_adjectives_opposites_01",
@@ -326,10 +312,7 @@
               ],
               "correctIndex": 0
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "vocab_definitions_01",
@@ -435,10 +418,7 @@
               ],
               "correctIndex": 0
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "vocab_speaking_questions_01",
@@ -541,8 +521,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "diagnostic_speaking",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are an English teacher for IT students. The student answers several discussion questions about tech jobs and vocabulary from the lesson. 1) Give short feedback on fluency and vocabulary. 2) Correct up to 3 important grammar mistakes. 3) Suggest 2 better phrases they can use next time.",
             "scoringDimensions": [
               "fluency",
@@ -647,10 +625,7 @@
               ],
               "correctIndex": 1
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "reading_vocab_from_scratch_01",
@@ -661,8 +636,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "short_answer_check",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are an English teacher. The student explains what the phrase \"from scratch\" means in the reading text. 1) Check if the meaning is generally correct. 2) Give a score from 0 to 3. 3) Offer one improved version of the sentence.",
             "scoringDimensions": [
               "content",
@@ -680,8 +653,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "short_answer_check",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are an English teacher. The student answers a short question based on a reading text. 1) Check if the meaning is generally correct. 2) Give a score from 0 to 3. 3) Correct major grammar mistakes in one improved version. Answer shortly.",
             "scoringDimensions": [
               "content",
@@ -732,10 +703,7 @@
               "sentence": "We ______ (work) from home this week because the office is closed.",
               "correct": "are working"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "grammar_present_simple_form_01",
@@ -780,10 +748,7 @@
               }
             ]
           },
-          "instruction": "Remember: we add -s in the third person singular (he/she/it). For verbs ending in -sh, -tch or -ss we add -es. For verbs ending in consonant + -y we change -y to -ies.",
-          "llmCheck": {
-            "enabled": false
-          }
+          "instruction": "Remember: we add -s in the third person singular (he/she/it). For verbs ending in -sh, -tch or -ss we add -es. For verbs ending in consonant + -y we change -y to -ies."
         },
         {
           "id": "grammar_present_simple_sentences_01",
@@ -855,10 +820,7 @@
               ],
               "correct": "What is the name of this company?"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "grammar_present_simple_qa_01",
@@ -881,10 +843,7 @@
               "sentence": "He ______ (not like) this.",
               "correct": "does not like"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "grammar_present_simple_extra_01",
@@ -931,10 +890,7 @@
               "sentence": "______ he ______ (like) his job?",
               "correct": "Does he like"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "grammar_present_continuous_form_01",
@@ -979,10 +935,7 @@
               }
             ]
           },
-          "instruction": "To form Present Continuous, use am/is/are + verb-ing.",
-          "llmCheck": {
-            "enabled": false
-          }
+          "instruction": "To form Present Continuous, use am/is/are + verb-ing."
         },
         {
           "id": "grammar_present_continuous_extra_01",
@@ -1029,10 +982,7 @@
               "sentence": "My mother ______ (sell) her apartment.",
               "correct": "is selling"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "grammar_correct_errors_01",
@@ -1070,8 +1020,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "short_answer_check",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are a grammar tutor. The student corrects sentences with Present Simple and Present Continuous. 1) Check if their correction is correct. 2) Give a score from 0 to 3. 3) If needed, show one correct version.",
             "scoringDimensions": [
               "accuracy"
@@ -1088,8 +1036,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "writing_feedback",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are an English teacher. The student writes about their typical working day (Present Simple) and what is different this week (Present Continuous). 1) Correct grammar and word order. 2) Give 2 short pieces of feedback. 3) Show one improved version of 3–5 sentences.",
             "scoringDimensions": [
               "grammar",
@@ -1104,8 +1050,6 @@
           "prompt": "Generate extra practice based on student mistakes.",
           "llmCheck": {
             "enabled": true,
-            "mode": "adaptive_grammar_tutor",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are a grammar tutor for IT English. The student completed several Present Simple vs Present Continuous sentences. Based on their mistakes, 1) explain one or two key rules in very simple English with 2 examples, 2) generate 5 new gap-fill sentences focusing only on these patterns, 3) provide correct answers.",
             "scoringDimensions": [
               "accuracy"
@@ -1232,10 +1176,7 @@
               "translation": "операционный директор",
               "transcript": "ˌsiː.əʊˈəʊ"
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "pronunciation_speaking_01",
@@ -1246,8 +1187,6 @@
           "prompt": "Record yourself saying at least ten tech job titles from the list.",
           "llmCheck": {
             "enabled": true,
-            "mode": "pronunciation_feedback_text",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You receive the ASR transcript and phoneme scores for the student's pronunciation of several tech job titles. Give short, friendly feedback in simple English and mention 1–2 words they should practice more.",
             "scoringDimensions": [
               "pronunciation"
@@ -1313,10 +1252,7 @@
               ],
               "correctIndex": 2
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "speaking_roleplay_01",
@@ -1433,8 +1369,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "conversational_partner",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are a friendly English-speaking colleague at an IT meetup. Have a short conversation (7-10 turns) with the student about their job and IT interests. Ask simple follow-up questions. After the conversation, give short feedback: 1) what was good, 2) up to 3 mistakes with corrections, 3) 3 better phrases they can use next time.",
             "scoringDimensions": [
               "fluency",
@@ -1468,8 +1402,6 @@
           ],
           "llmCheck": {
             "enabled": true,
-            "mode": "writing_feedback",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You are an English writing teacher for IT students. The student wrote an elevator pitch about themselves. 1) Correct grammar and word choice but keep their style. 2) Show the corrected version. 3) Highlight changes in brackets []. 4) Suggest one more advanced version and one simpler version. Keep each version 4-6 sentences long.",
             "scoringDimensions": [
               "grammar",
@@ -1566,10 +1498,7 @@
               ],
               "correctIndex": 0
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "quiz_grammar_01",
@@ -1648,10 +1577,7 @@
               ],
               "correctIndex": 1
             }
-          ],
-          "llmCheck": {
-            "enabled": false
-          }
+          ]
         },
         {
           "id": "quiz_summary_llm_01",
@@ -1659,8 +1585,6 @@
           "prompt": "Generate a short summary of the student's performance in Lesson 1.",
           "llmCheck": {
             "enabled": true,
-            "mode": "lesson_summary_feedback",
-            "provider": "openai:gpt-4.1-mini",
             "systemPrompt": "You receive the student's results for Lesson 1 (vocabulary quiz, grammar quiz, speaking and writing scores). 1) Mention 2 strengths. 2) Mention 2 areas to improve. 3) Give 2 concrete recommendations for the next lesson. Use simple, motivating English.",
             "scoringDimensions": [
             ],
