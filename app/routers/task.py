@@ -3,8 +3,9 @@ import json
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 
 from app.schemas.audio_check import AudioCheckMeta
-from app.services.asr_service import transcribe_audio
-from app.services.asr_service import transcribe_and_score
+from app.schemas.text_check import TextCheckResponse, TextCheckRequest
+from app.services.llm_check_service import transcribe_audio, check_text
+from app.services.llm_check_service import transcribe_and_score
 
 router = APIRouter(prefix="/task", tags=["task"])
 
@@ -22,7 +23,7 @@ async def transcribe_audio_endpoint(file: UploadFile = File(...)):
 
 
 @router.post("/check_audio")
-async def transcribe_audio_endpoint(
+async def check_audio_endpoint(
     file: UploadFile = File(...),
     meta: str = Form(...),
 ):
@@ -35,3 +36,15 @@ async def transcribe_audio_endpoint(
         raise HTTPException(status_code=400, detail=f"Invalid meta JSON: {e}")
 
     return await transcribe_and_score(file, meta_obj)
+
+@router.post("/check_text", response_model=TextCheckResponse)
+async def check_text_endpoint(payload: TextCheckRequest):
+    if not payload.text.strip():
+        raise HTTPException(status_code=400, detail="Text is empty")
+
+    feedback = await check_text(
+        text=payload.text,
+        system_prompt=payload.systemPrompt,
+        scoring_dimensions=payload.scoringDimensions,
+    )
+    return TextCheckResponse(status="ok", message=feedback)

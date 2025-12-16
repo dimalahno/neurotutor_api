@@ -86,7 +86,6 @@
             }
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are an English teacher for IT students. Analyze the student's answer about their job and IT interests. 1) Give a CEFR-like level estimate (A2/B1/B2) with one sentence justification. 2) Point out up to 3 typical grammar mistakes, especially with present tenses. 3) Suggest 2 simple tips for improvement. Answer in simple English.",
             "scoringDimensions": [
               "fluency",
@@ -429,8 +428,7 @@
               "id": "q1",
               "prompt": "How do you keep up with what’s going on in the world?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "I keep up with the world by reading news websites and following experts on social media.",
               "targetPatterns": [
@@ -448,8 +446,7 @@
               "id": "q2",
               "prompt": "How much time do you think it takes to learn a new skill from scratch?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "I think it takes several months to learn a new skill from scratch.",
               "targetPatterns": [
@@ -467,8 +464,7 @@
               "id": "q3",
               "prompt": "Are you normally concise when you speak?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "Yes, I try to be concise when I speak because it helps others understand me faster.",
               "targetPatterns": [
@@ -485,8 +481,7 @@
               "id": "q4",
               "prompt": "What are some things you have a solid understanding of?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "I have a solid understanding of programming basics and data analysis.",
               "targetPatterns": [
@@ -503,8 +498,7 @@
               "id": "q5",
               "prompt": "Which of these 5 jobs is the hardest to do? Which is the easiest? Why?",
               "inputType": [
-                "audio",
-                "text"
+                "audio"
               ],
               "modelAnswer": "I think the hardest job is a software architect because it requires deep knowledge and responsibility. The easiest is a junior support specialist because the tasks are more basic.",
               "targetPatterns": [
@@ -520,7 +514,6 @@
             }
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are an English teacher for IT students. The student answers several discussion questions about tech jobs and vocabulary from the lesson. 1) Give short feedback on fluency and vocabulary. 2) Correct up to 3 important grammar mistakes. 3) Suggest 2 better phrases they can use next time.",
             "scoringDimensions": [
               "fluency",
@@ -635,7 +628,6 @@
             "text"
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are an English teacher. The student explains what the phrase \"from scratch\" means in the reading text. 1) Check if the meaning is generally correct. 2) Give a score from 0 to 3. 3) Offer one improved version of the sentence.",
             "scoringDimensions": [
               "content",
@@ -652,7 +644,6 @@
             "text"
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are an English teacher. The student answers a short question based on a reading text. 1) Check if the meaning is generally correct. 2) Give a score from 0 to 3. 3) Correct major grammar mistakes in one improved version. Answer shortly.",
             "scoringDimensions": [
               "content",
@@ -1019,7 +1010,6 @@
             }
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are a grammar tutor. The student corrects sentences with Present Simple and Present Continuous. 1) Check if their correction is correct. 2) Give a score from 0 to 3. 3) If needed, show one correct version.",
             "scoringDimensions": [
               "accuracy"
@@ -1035,7 +1025,6 @@
             "text"
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are an English teacher. The student writes about their typical working day (Present Simple) and what is different this week (Present Continuous). 1) Correct grammar and word order. 2) Give 2 short pieces of feedback. 3) Show one improved version of 3–5 sentences.",
             "scoringDimensions": [
               "grammar",
@@ -1049,7 +1038,6 @@
           "type": "llm_adaptive",
           "prompt": "Generate extra practice based on student mistakes.",
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are a grammar tutor for IT English. The student completed several Present Simple vs Present Continuous sentences. Based on their mistakes, 1) explain one or two key rules in very simple English with 2 examples, 2) generate 5 new gap-fill sentences focusing only on these patterns, 3) provide correct answers.",
             "scoringDimensions": [
               "accuracy"
@@ -1186,7 +1174,6 @@
           ],
           "prompt": "Record yourself saying at least ten tech job titles from the list.",
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You receive the ASR transcript and phoneme scores for the student's pronunciation of several tech job titles. Give short, friendly feedback in simple English and mention 1–2 words they should practice more.",
             "scoringDimensions": [
               "pronunciation"
@@ -1368,7 +1355,6 @@
             }
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are a friendly English-speaking colleague at an IT meetup. Have a short conversation (7-10 turns) with the student about their job and IT interests. Ask simple follow-up questions. After the conversation, give short feedback: 1) what was good, 2) up to 3 mistakes with corrections, 3) 3 better phrases they can use next time.",
             "scoringDimensions": [
               "fluency",
@@ -1401,7 +1387,6 @@
             "text"
           ],
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You are an English writing teacher for IT students. The student wrote an elevator pitch about themselves. 1) Correct grammar and word choice but keep their style. 2) Show the corrected version. 3) Highlight changes in brackets []. 4) Suggest one more advanced version and one simpler version. Keep each version 4-6 sentences long.",
             "scoringDimensions": [
               "grammar",
@@ -1584,7 +1569,6 @@
           "type": "llm_summary_feedback",
           "prompt": "Generate a short summary of the student's performance in Lesson 1.",
           "llmCheck": {
-            "enabled": true,
             "systemPrompt": "You receive the student's results for Lesson 1 (vocabulary quiz, grammar quiz, speaking and writing scores). 1) Mention 2 strengths. 2) Mention 2 areas to improve. 3) Give 2 concrete recommendations for the next lesson. Use simple, motivating English.",
             "scoringDimensions": [
             ],

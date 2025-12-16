@@ -40,7 +40,7 @@ async def transcribe_audio(file: UploadFile) -> str:
                 pass
 
 
-def _build_input(meta: AudioCheckMeta, transcript: str) -> str:
+def _build_audio_input(meta: AudioCheckMeta, transcript: str) -> str:
     return (
         f"Student transcript:\n{transcript}\n\n"
         f"Model answer:\n{meta.modelAnswer}\n\n"
@@ -74,7 +74,7 @@ async def transcribe_and_score(file: UploadFile, meta: AudioCheckMeta) -> dict:
         eval_resp = await client.responses.create(
             model="gpt-4.1-mini",
             instructions=meta.systemPrompt,
-            input=_build_input(meta, transcript),
+            input=_build_audio_input(meta, transcript),
             temperature=0.2,
             max_output_tokens=220,
         )
@@ -95,3 +95,17 @@ async def transcribe_and_score(file: UploadFile, meta: AudioCheckMeta) -> dict:
                 os.remove(tmp_path)
             except OSError:
                 pass
+
+def _build_input(text: str, scoring_dimensions: list[str]) -> str:
+    dims = "\n- " + "\n- ".join(scoring_dimensions) if scoring_dimensions else ""
+    return f"Student text:\n{text}\n\nScoring dimensions:{dims}"
+
+async def check_text(text: str, system_prompt: str, scoring_dimensions: list[str]) -> str:
+    resp = await client.responses.create(
+        model="gpt-4.1-mini",
+        instructions=system_prompt or "You are an English teacher. Give short feedback.",
+        input=_build_input(text, scoring_dimensions),
+        temperature=0.2,
+        max_output_tokens=220,
+    )
+    return resp.output_text.strip()
