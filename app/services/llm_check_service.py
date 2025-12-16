@@ -96,7 +96,7 @@ async def transcribe_and_score(file: UploadFile, meta: AudioCheckMeta) -> dict:
             except OSError:
                 pass
 
-def _build_input(text: str, scoring_dimensions: list[str]) -> str:
+def _build_text_input(text: str, scoring_dimensions: list[str]) -> str:
     dims = "\n- " + "\n- ".join(scoring_dimensions) if scoring_dimensions else ""
     return f"Student text:\n{text}\n\nScoring dimensions:{dims}"
 
@@ -104,7 +104,7 @@ async def check_text(text: str, system_prompt: str, scoring_dimensions: list[str
     resp = await client.responses.create(
         model="gpt-4.1-mini",
         instructions=system_prompt or "You are an English teacher. Give short feedback.",
-        input=_build_input(text, scoring_dimensions),
+        input=_build_text_input(text, scoring_dimensions),
         temperature=0.2,
         max_output_tokens=220,
     )
