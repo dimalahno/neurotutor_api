@@ -62,7 +62,6 @@ docker compose up -d
 - Остановить:
 ```
 docker compose down
-docker compose down -v
 ```
 - Проверить состояние контейнеров:
 ```
