@@ -605,7 +605,7 @@
         {
           "id": "pronunciation_list_01",
           "type": "listen_and_repeat",
-          "audioUrl": "track_2_1.mp3",
+          "audioUrl": "track_2_2.mp3",
           "words": [
             {
               "term": "Can you make it to my birthday dinner?",
@@ -678,12 +678,6 @@
               "transcript": "ə fjuː jɪəz əˈɡəʊ aɪ ɡɒt ə tʃɑːns tə wɜːk wɪð ə ɡreɪt ˈɡræfɪk dɪˈzaɪnər"
             }
           ]
-        },
-        {
-          "id": "pronunciation_intonation_rules_01",
-          "type": "info_block",
-          "title": "Intonation rules",
-          "text": "Use rising intonation for Yes/No questions and after breaks in long sentences. Use falling intonation for Wh-questions and at the end of statements. In choice questions, intonation rises on each option and falls at the end."
         },
         {
           "id": "pronunciation_intonation_practice_01",
