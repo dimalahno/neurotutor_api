@@ -1,0 +1,1141 @@
+{
+  "index": 2,
+  "title": "How to Build a Startup?",
+  "slug": "how-to-build-a-startup",
+  "lang_level": [
+    "A2",
+    "B1"
+  ],
+  "estimatedTimeMinutes": 75,
+  "agenda": {
+    "Vocabulary": {
+      "order_id": 1,
+      "description": "Learn key vocabulary about startups and markets."
+    },
+    "Grammar": {
+      "order_id": 2,
+      "description": "Practice Past Simple vs Present Perfect."
+    },
+    "Pronunciation": {
+      "order_id": 3,
+      "description": "Practice English intonation."
+    },
+    "Speaking & Soft Skills": {
+      "order_id": 4,
+      "description": "Build and deliver a sales pitch."
+    },
+    "Writing": {
+      "order_id": 5,
+      "description": "Write your own sales pitch."
+    }
+  },
+  "units": [
+    {
+      "id": "unit_warmup",
+      "type": "warmup",
+      "title": "Warm-up: Startup vs Big Company",
+      "description": "Discuss advantages of working at a startup and react to a tweet about startup culture.",
+      "order": 1,
+      "activities": [
+        {
+          "id": "warmup_speaking_01",
+          "type": "speaking_prompt",
+          "show_question_mode": "sequential",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "What are the advantages of working at a startup as opposed to working at a big company?",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Working at a startup can mean faster growth, more responsibility and more impact, but it can be riskier.",
+              "targetPatterns": [
+                "Working at a startup can mean ...",
+                "Compared to a big company, a startup ..."
+              ],
+              "keywords": [
+                "startup",
+                "big company",
+                "growth",
+                "responsibility",
+                "risk"
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Look at the tweet from the lesson. What pros does it mention? Do you agree?",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "It mentions being aligned, having risk tolerance and moving fast. I partly agree because it depends on the team.",
+              "keywords": [
+                "aligned",
+                "risk tolerance",
+                "pros",
+                "agree"
+              ]
+            }
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English teacher for IT students. The student discusses startup vs big company. 1) Give a CEFR-like level estimate (A2/B1/B2) with one sentence justification. 2) Correct up to 3 important grammar mistakes. 3) Suggest 2 concise improvements. Answer in simple English.",
+            "scoringDimensions": [
+              "fluency",
+              "grammar",
+              "vocabulary_range"
+            ],
+            "maxScore": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_vocabulary",
+      "type": "vocabulary",
+      "title": "Vocabulary: Startup culture & the market",
+      "description": "Learn key terms used to talk about startups, pitching and the market.",
+      "order": 2,
+      "activities": [
+        {
+          "id": "vocab_list_01",
+          "type": "vocab_list",
+          "words": [
+            {
+              "term": "to be aligned",
+              "definition": "to be in agreement",
+              "example": "The founders are aligned on the product vision."
+            },
+            {
+              "term": "risk tolerance",
+              "definition": "the amount of loss an investor is ready to handle",
+              "example": "Early-stage investors often have high risk tolerance."
+            },
+            {
+              "term": "pain point",
+              "definition": "a problem that a business/service can solve",
+              "example": "We solve a customer pain point in onboarding."
+            },
+            {
+              "term": "scalable",
+              "definition": "able to grow bigger without breaking",
+              "example": "We need a scalable solution."
+            },
+            {
+              "term": "pivot",
+              "definition": "change the course of an existing strategy",
+              "example": "If the market changes, we can pivot."
+            },
+            {
+              "term": "bring (someone) on board",
+              "definition": "ask someone to join the team",
+              "example": "We brought a designer on board."
+            },
+            {
+              "term": "in charge",
+              "definition": "the main person responsible for something",
+              "example": "She is in charge of hiring."
+            },
+            {
+              "term": "expenses",
+              "definition": "costs",
+              "example": "We need to track expenses carefully."
+            },
+            {
+              "term": "incubator",
+              "definition": "an organization that helps early-stage startups develop an idea and business plan",
+              "example": "They joined an incubator for mentorship."
+            },
+            {
+              "term": "accelerator",
+              "definition": "an organization that helps startups with an MVP grow faster",
+              "example": "The accelerator helped them scale up."
+            },
+            {
+              "term": "pitch",
+              "definition": "a short persuasive presentation of an idea/product/company",
+              "example": "He practiced his pitch for investors."
+            },
+            {
+              "term": "at stake",
+              "definition": "at risk",
+              "example": "A lot is at stake in this deal."
+            }
+          ]
+        },
+        {
+          "id": "vocab_matching_startup_01",
+          "type": "matching",
+          "prompt": "Match the highlighted startup words with their definitions.",
+          "items": [
+            {
+              "question": "pain point",
+              "options": [
+                "a problem that a business/service can solve",
+                "a yearly budget plan",
+                "a person who invests in startups"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "scalable",
+              "options": [
+                "having an ability to grow bigger",
+                "easy to understand",
+                "very expensive"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "pivot",
+              "options": [
+                "change the course of the existing strategy",
+                "hire a new employee",
+                "reduce costs"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "bring (someone) on board",
+              "options": [
+                "ask someone to join the team",
+                "close a company",
+                "make a long speech"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "expenses",
+              "options": [
+                "costs",
+                "profits",
+                "skills"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "concise",
+              "options": [
+                "short and informative",
+                "shaky and uncertain",
+                "slow and careful"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "at stake",
+              "options": [
+                "at risk",
+                "already done",
+                "in the future"
+              ],
+              "correctIndex": 0
+            }
+          ]
+        },
+        {
+          "id": "vocab_market_phrases_01",
+          "type": "gap_fill",
+          "prompt": "Complete the sentences with the correct market expression.",
+          "items": [
+            {
+              "sentence": "The United States is a ______ where the prices are determined by the rules of supply and demand.",
+              "correct": "market economy"
+            },
+            {
+              "sentence": "They were planning to release their app next month but their competitors ______ them ______.",
+              "correct": "beat to market"
+            },
+            {
+              "sentence": "This is the best solution ______ right now.",
+              "correct": "on the market"
+            },
+            {
+              "sentence": "A company always takes a risk when it tries to ______ a new ______.",
+              "correct": "break into a market"
+            },
+            {
+              "sentence": "We need to create a strong ______ if we want our product to be successful from the first day of the launch.",
+              "correct": "go-to-market strategy"
+            },
+            {
+              "sentence": "That company has ______ and become the leading desktop manufacturer in the industry.",
+              "correct": "cornered the market"
+            },
+            {
+              "sentence": "I’m ______ a new pair of headphones.",
+              "correct": "in the market for"
+            },
+            {
+              "sentence": "Have you considered hiring a ______ to help you with promoting your services?",
+              "correct": "marketer"
+            }
+          ]
+        },
+        {
+          "id": "vocab_discussion_01",
+          "type": "speaking_prompt",
+          "show_question_mode": "sequential",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Are you currently in the market for anything? What is it?",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Yes, I'm in the market for a new laptop.",
+              "targetPatterns": [
+                "I'm in the market for ..."
+              ],
+              "keywords": [
+                "in the market for"
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Can you explain in your own words what marketers do?",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Marketers research customers, position products and run campaigns to drive sales.",
+              "keywords": [
+                "marketers",
+                "customers",
+                "campaigns"
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Can you give examples of companies that managed to corner the market? How did they do it?",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Some companies corner the market by building a strong brand and distribution network.",
+              "keywords": [
+                "corner the market",
+                "brand",
+                "distribution"
+              ]
+            }
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English teacher. The student discusses market vocabulary. 1) Give short feedback on clarity and vocabulary. 2) Correct up to 3 key mistakes. 3) Suggest 2 stronger phrases.",
+            "scoringDimensions": [
+              "fluency",
+              "grammar",
+              "vocabulary_range"
+            ],
+            "maxScore": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_reading",
+      "type": "reading",
+      "title": "Reading: Startup culture and building a startup",
+      "description": "Read a text about startup culture, four steps to build a startup, and incubators vs accelerators.",
+      "order": 3,
+      "reading": {
+        "id": "reading_text_02",
+        "title": "How to Build a Startup?",
+        "text": {
+          "description": "A short text about startup culture and the steps to build a startup.",
+          "content_data": [
+            {
+              "order_id": 1,
+              "profession": "Startup culture",
+              "content_text": "Did you ever dream of building your own startup? Even if you didn’t, startup mentality and startup culture are popular in the tech world.\n\nMany startups have values that even big businesses are trying to adopt: quickly adapting to change; demanding high involvement; open, honest and transparent relationships; thinking outside the box and finding innovative, cost-effective solutions.\n\nIf you’re planning on creating your own business, thinking like an entrepreneur can help your personal development and career growth.\n\nFour steps for building a startup:\n1) Develop a vision for your product. Ask yourself what customer pain point you can solve, which gaps in the market you can fill, whether your solution is elegant and scalable, and whether you can pivot if you have to.\n2) Put together a great team. As a leader, you need to be in charge of hiring and bring people on board who match the company and share motivation and passion.\n3) Think about the logistics. Consider your location, expenses and annual budget. Incubators can help with low-cost equipment, mentorship, marketing/PR, pitching, accommodation and networking.\n4) Prepare your pitch. Pitching is delivering a concise, informative speech about yourself, your product or your company to people who can fund and mentor you.\n\nExtra: Incubators help startups discover an idea and create a business plan. Accelerators help startups with an existing MVP to grow and develop quicker.",
+              "is_tts": true
+            }
+          ]
+        },
+        "audioUrl": "track_2_1.mp3",
+        "glossary": [
+          {
+            "word": "transparent",
+            "definition": "able to be seen through clearly; open and honest"
+          },
+          {
+            "word": "scalable",
+            "definition": "able to grow bigger"
+          },
+          {
+            "word": "pivot",
+            "definition": "change direction/strategy"
+          },
+          {
+            "word": "incubator",
+            "definition": "organization that supports early-stage startups"
+          },
+          {
+            "word": "accelerator",
+            "definition": "organization that helps startups with an MVP scale faster"
+          }
+        ]
+      },
+      "activities": [
+        {
+          "id": "reading_headlines_01",
+          "type": "matching",
+          "prompt": "Match each paragraph to the correct headline (4 steps).",
+          "items": [
+            {
+              "question": "Paragraph 1: Good idea / customer pain point / scalable / pivot",
+              "options": [
+                "Develop a vision for your product",
+                "Put together a great team",
+                "Think about the logistics",
+                "Prepare your pitch"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "Paragraph 2: Hiring / right match / motivation / passion",
+              "options": [
+                "Develop a vision for your product",
+                "Put together a great team",
+                "Think about the logistics",
+                "Prepare your pitch"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "Paragraph 3: Location / expenses / annual budget / incubator support",
+              "options": [
+                "Develop a vision for your product",
+                "Put together a great team",
+                "Think about the logistics",
+                "Prepare your pitch"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "Paragraph 4: Concise speech / fund / mentor / learn from pitches",
+              "options": [
+                "Develop a vision for your product",
+                "Put together a great team",
+                "Think about the logistics",
+                "Prepare your pitch"
+              ],
+              "correctIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "reading_vocab_1a_01",
+          "type": "open_answer",
+          "prompt": "Find words in the text that match these meanings: a) able to be seen through clearly, b) adjusting, c) start developing something successfully, d) desire to take active part in something, e) with an optimal balance of value to price, f) giving good results, g) business founder.",
+          "inputType": [
+            "text"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English teacher. The student identifies vocabulary in a reading. 1) Check if each item is correct or close. 2) Score 0-7 (one point per correct item). 3) Provide the correct answers list.",
+            "scoringDimensions": [
+              "accuracy"
+            ],
+            "maxScore": 7
+          }
+        },
+        {
+          "id": "reading_comprehension_01",
+          "type": "open_answer",
+          "prompt": "In 3–5 sentences, explain the difference between an incubator and an accelerator (from the text).",
+          "inputType": [
+            "text"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English teacher. The student explains incubator vs accelerator. 1) Check meaning accuracy. 2) Score 0-3. 3) Provide one improved version with corrected grammar.",
+            "scoringDimensions": [
+              "content",
+              "grammar"
+            ],
+            "maxScore": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_grammar",
+      "type": "grammar",
+      "title": "Grammar: Past Simple vs Present Perfect",
+      "description": "Learn when to use Past Simple vs Present Perfect and practice with exercises from the lesson.",
+      "order": 4,
+      "explanation": {
+        "text": "Use Past Simple for finished time in the past (yesterday, last week, in 2016). Use Present Perfect for unfinished time or life experience up to now (ever/never/just/already/yet, for/since).",
+        "examples": [
+          "I worked in an electronics store when I was a student. (Past Simple)",
+          "I have worked as a software engineer at this company for 6 years. (Present Perfect)",
+          "Have you ever tried Voice UI? (Present Perfect)"
+        ]
+      },
+      "activities": [
+        {
+          "id": "grammar_choose_form_01",
+          "type": "multiple_choice",
+          "prompt": "Choose the correct form (Past Simple or Present Perfect).",
+          "items": [
+            {
+              "question": "I ______ any new books recently.",
+              "options": [
+                "haven’t bought",
+                "didn’t buy"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "Two of my teammates ______ the company last week.",
+              "options": [
+                "have left",
+                "left"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "We ______ a lot of time fixing this issue last night.",
+              "options": [
+                "have spent",
+                "spent"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "______ a competition?",
+              "options": [
+                "Have you ever won",
+                "Did you ever win"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "We ______ the sprint on Friday.",
+              "options": [
+                "have finished",
+                "finished"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "Who is this guy? I ______ him before.",
+              "options": [
+                "have never met",
+                "never met"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "I ______ to the USA.",
+              "options": [
+                "have never been",
+                "I never was"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "Jeff isn’t at the office this week. He ______ on a business trip.",
+              "options": [
+                "has gone",
+                "went"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "We ______ on a huge conference.",
+              "options": [
+                "have been",
+                "were"
+              ],
+              "correctIndex": 0
+            }
+          ]
+        },
+        {
+          "id": "grammar_for_since_01",
+          "type": "gap_fill",
+          "prompt": "Choose for or since.",
+          "items": [
+            {
+              "sentence": "I have been interested in technology ______ I was a child.",
+              "correct": "since"
+            },
+            {
+              "sentence": "We can trust Jim with it, he has worked in this area ______ six years now.",
+              "correct": "for"
+            },
+            {
+              "sentence": "They have been in this meeting room ______ 3 hours and they haven’t finished yet.",
+              "correct": "for"
+            },
+            {
+              "sentence": "He has lived in Ireland ______ over 5 years now ______ he started working at Google.",
+              "correct": "for since"
+            },
+            {
+              "sentence": "He’s my best friend, I have known him ______ school.",
+              "correct": "since"
+            },
+            {
+              "sentence": "Tom hasn’t been that much fun ______ he got married.",
+              "correct": "since"
+            }
+          ]
+        },
+        {
+          "id": "grammar_put_verbs_01",
+          "type": "open_answer",
+          "prompt": "Put the verbs in brackets into the correct tense (Past Simple or Present Perfect):\n1) We (have) a lot of tasks last night. I (come) home at midnight.\n2) He (never/work) in this position before.\n3) He (send) me the report yet.\n4) I (work) at this company for 3 years. (I still work here).\n5) I (work) at this company for 3 years. (I don’t work here anymore).\n6) — (you/ever/be) to California? — Yes, I (be) there two years ago.",
+          "inputType": [
+            "text"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are a grammar tutor. The student conjugates verbs using Past Simple vs Present Perfect. 1) Score 0-6 (one point per sentence block). 2) Provide the correct answers. 3) Correct 1-2 most important errors briefly.",
+            "scoringDimensions": [
+              "accuracy"
+            ],
+            "maxScore": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_pronunciation",
+      "type": "pronunciation",
+      "title": "Pronunciation: Intonation",
+      "description": "Practice rising and falling intonation in questions and long sentences.",
+      "order": 5,
+      "activities": [
+        {
+          "id": "pronunciation_list_01",
+          "type": "listen_and_repeat",
+          "audioUrl": "track_2_1.mp3",
+          "words": [
+            {
+              "term": "Can you make it to my birthday dinner?",
+              "translation": "Ты сможешь прийти на мой праздничный ужин?",
+              "transcript": "kæn juː meɪk ɪt tə maɪ ˈbɜːrθdeɪ ˈdɪnər"
+            },
+            {
+              "term": "Do you wanna see a movie tonight?",
+              "translation": "Хочешь посмотреть фильм сегодня вечером?",
+              "transcript": "duː juː ˈwɒnə siː ə ˈmuːvi təˈnaɪt"
+            },
+            {
+              "term": "Did you have time to watch the final episode?",
+              "translation": "Ты успел посмотреть финальную серию?",
+              "transcript": "dɪd juː hæv taɪm tə wɒtʃ ðə ˈfaɪnəl ˈepɪsəʊd"
+            },
+            {
+              "term": "Is it true that you lost your phone?",
+              "translation": "Правда, что ты потерял телефон?",
+              "transcript": "ɪz ɪt truː ðət juː lɒst jɔːr fəʊn"
+            },
+            {
+              "term": "Should we ask her to join us?",
+              "translation": "Нам стоит попросить её присоединиться?",
+              "transcript": "ʃʊd wiː ɑːsk hər tə dʒɔɪn ʌs"
+            },
+            {
+              "term": "What did you think of the project?",
+              "translation": "Что ты думаешь о проекте?",
+              "transcript": "wɒt dɪd juː θɪŋk əv ðə ˈprɒdʒekt"
+            },
+            {
+              "term": "Why are you so busy lately?",
+              "translation": "Почему ты так занят в последнее время?",
+              "transcript": "waɪ ɑːr juː səʊ ˈbɪzi ˈleɪtli"
+            },
+            {
+              "term": "Where should we go for lunch?",
+              "translation": "Куда нам пойти на обед?",
+              "transcript": "weər ʃʊd wiː ɡəʊ fə lʌntʃ"
+            },
+            {
+              "term": "Can you help me now or later?",
+              "translation": "Ты можешь помочь мне сейчас или позже?",
+              "transcript": "kæn juː help miː naʊ ɔːr ˈleɪtər"
+            },
+            {
+              "term": "Is the best time to meet on Monday, Tuesday or Wednesday?",
+              "translation": "Лучшее время для встречи — в понедельник, вторник или среду?",
+              "transcript": "ɪz ðə best taɪm tə miːt ɒn ˈmʌndeɪ, ˈtjuːzdeɪ ɔːr ˈwenzdeɪ"
+            },
+            {
+              "term": "Would you like vanilla, caramel, strawberry or chocolate?",
+              "translation": "Ты хочешь ваниль, карамель, клубнику или шоколад?",
+              "transcript": "wʊd juː laɪk vəˈnɪlə, ˈkærəməl, ˈstrɔːbəri ɔːr ˈtʃɒklət"
+            },
+            {
+              "term": "Actually, we still have some time.",
+              "translation": "Вообще-то у нас ещё есть время.",
+              "transcript": "ˈæktʃuəli wiː stɪl hæv sʌm taɪm"
+            },
+            {
+              "term": "In fact, I tried calling him the other day but he didn’t pick up.",
+              "translation": "На самом деле я пытался ему позвонить на днях, но он не ответил.",
+              "transcript": "ɪn fækt aɪ traɪd ˈkɔːlɪŋ hɪm ði ˈʌðər deɪ bʌt hiː ˈdɪdnt pɪk ʌp"
+            },
+            {
+              "term": "A few years ago, I got a chance to work with a great graphic designer.",
+              "translation": "Несколько лет назад у меня был шанс поработать с отличным графическим дизайнером.",
+              "transcript": "ə fjuː jɪəz əˈɡəʊ aɪ ɡɒt ə tʃɑːns tə wɜːk wɪð ə ɡreɪt ˈɡræfɪk dɪˈzaɪnər"
+            }
+          ]
+        },
+        {
+          "id": "pronunciation_intonation_rules_01",
+          "type": "info_block",
+          "title": "Intonation rules",
+          "text": "Use rising intonation for Yes/No questions and after breaks in long sentences. Use falling intonation for Wh-questions and at the end of statements. In choice questions, intonation rises on each option and falls at the end."
+        },
+        {
+          "id": "pronunciation_intonation_practice_01",
+          "type": "speaking_prompt",
+          "prompt": "Read these sentences aloud using correct intonation (rising/falling). Record your audio:\n1) Can you make it to my birthday dinner?\n2) What did you think of the project?\n3) Can you help me now or later?\n4) Is the best time to meet on Monday, Tuesday or Wednesday?\n5) Actually, we still have some time.",
+          "inputType": [
+            "audio"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You receive the ASR transcript and prosody cues. Give short feedback on intonation (rising/falling) for questions and choice questions. Mention 1-2 lines to repeat. Answer in simple English.",
+            "scoringDimensions": [
+              "pronunciation"
+            ],
+            "maxScore": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_speaking",
+      "type": "speaking",
+      "title": "Speaking & Soft Skills: Sales pitch",
+      "description": "Practice presenting your company or product using a clear pitch structure.",
+      "order": 6,
+      "activities": [
+        {
+          "id": "speaking_pitch_structure_01",
+          "type": "speaking_prompt",
+          "show_question_mode": "sequential",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Who are you? (role/title)",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "I'm a product manager at a small startup.",
+              "targetPatterns": [
+                "I'm a ... at ..."
+              ],
+              "keywords": [
+                "role",
+                "company"
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "What does your company do? (mission)",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "We help small teams manage tasks and communicate clearly.",
+              "keywords": [
+                "mission",
+                "help"
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "What’s the value proposition? (what you do better)",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "We make onboarding faster with templates and automation.",
+              "keywords": [
+                "value",
+                "better",
+                "automation"
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Grab attention: add one fact, story or statistic.",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Over 40% of teams fail to onboard users properly—our product fixes that.",
+              "keywords": [
+                "fact",
+                "statistic",
+                "story"
+              ]
+            }
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are a friendly English-speaking colleague. The student delivers a short sales pitch in 4 parts. 1) Give short feedback on clarity and persuasiveness. 2) Correct up to 3 mistakes. 3) Suggest 3 stronger phrases. Keep it short.",
+            "scoringDimensions": [
+              "fluency",
+              "interaction",
+              "grammar",
+              "vocabulary"
+            ],
+            "maxScore": 15
+          }
+        },
+        {
+          "id": "speaking_roleplay_investor_01",
+          "type": "roleplay",
+          "prompt": "Role-play: you meet a potential mentor/investor. Deliver a concise pitch about your startup idea and answer follow-up questions.",
+          "turns": [
+            {
+              "id": "t1",
+              "role": "tutor",
+              "type": "question",
+              "text": "Hi! What are you building?"
+            },
+            {
+              "id": "a1",
+              "role": "student",
+              "type": "answer",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "I'm building a tool that helps teams create better pitch decks.",
+              "targetPatterns": [
+                "I'm building ..."
+              ],
+              "keywords": [
+                "building",
+                "tool"
+              ]
+            },
+            {
+              "id": "t2",
+              "role": "tutor",
+              "type": "question",
+              "text": "What customer pain point do you solve?"
+            },
+            {
+              "id": "a2",
+              "role": "student",
+              "type": "answer",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Teams waste time and lose investors because their pitch is unclear.",
+              "keywords": [
+                "pain point",
+                "unclear"
+              ]
+            },
+            {
+              "id": "t3",
+              "role": "tutor",
+              "type": "question",
+              "text": "Why is your solution different?"
+            },
+            {
+              "id": "a3",
+              "role": "student",
+              "type": "answer",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "We use templates and AI feedback to keep the pitch concise.",
+              "keywords": [
+                "different",
+                "concise",
+                "AI"
+              ]
+            },
+            {
+              "id": "t4",
+              "role": "tutor",
+              "type": "question",
+              "text": "What do you need next: money, mentorship, or partners?"
+            },
+            {
+              "id": "a4",
+              "role": "student",
+              "type": "answer",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "I need mentorship and introductions to early customers.",
+              "keywords": [
+                "mentorship",
+                "customers"
+              ]
+            },
+            {
+              "id": "end",
+              "role": "system",
+              "type": "end"
+            }
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are a mentor/investor. Have a short conversation (7-10 turns) about the student’s startup pitch. Ask follow-up questions about team, market, and next steps. After the role-play, provide: 1) 2 strengths, 2) up to 3 corrections, 3) 2 actionable tips. Simple English.",
+            "scoringDimensions": [
+              "fluency",
+              "interaction",
+              "grammar",
+              "vocabulary"
+            ],
+            "maxScore": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_writing",
+      "type": "writing",
+      "title": "Writing: Crafting your own sales pitch",
+      "description": "Write a short pitch following the 4-step structure (who you are, what you do, value, hook).",
+      "order": 7,
+      "activities": [
+        {
+          "id": "writing_sales_pitch_01",
+          "type": "open_answer",
+          "prompt": "Write your sales pitch (4–6 sentences). Include: 1) who you are, 2) what your company/product does, 3) value proposition, 4) an attention-grabbing fact or story.",
+          "inputType": [
+            "text"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English writing teacher. The student wrote a short sales pitch. 1) Correct grammar and word choice but keep their style. 2) Show the corrected version. 3) Highlight changes in brackets []. 4) Suggest one more advanced version and one simpler version. Each 4-6 sentences.",
+            "scoringDimensions": [
+              "grammar",
+              "vocabulary",
+              "clarity",
+              "coherence"
+            ],
+            "maxScore": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_quiz",
+      "type": "quiz",
+      "title": "Lesson 2 Quiz",
+      "description": "Test your knowledge of the vocabulary, grammar and intonation from Lesson 2.",
+      "order": 8,
+      "activities": [
+        {
+          "id": "quiz_lesson2_01",
+          "type": "multiple_choice",
+          "prompt": "Choose the correct answer.",
+          "items": [
+            {
+              "question": "After months of hard work, we have finally managed to get our product ____ the ground.",
+              "options": [
+                "off",
+                "to",
+                "on"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "The opposite of “beneficial” is:",
+              "options": [
+                "harmful",
+                "transparent",
+                "efficient"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "You can’t put the future of your company ____ stake.",
+              "options": [
+                "on",
+                "to",
+                "at"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "I have this issue many times before.",
+              "options": [
+                "met",
+                "faced with",
+                "come across"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "He went to a conference for business founders where he met many ____.",
+              "options": [
+                "jack-of-all-trades",
+                "entrepreneurs",
+                "incubators"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "You need to know what your customers’ ____ are before you start developing your product.",
+              "options": [
+                "issues",
+                "pivots",
+                "pain points"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "The synonym of “annual” is:",
+              "options": [
+                "early",
+                "yearly",
+                "annoying"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "We decided to ____ two new designers ____.",
+              "options": [
+                "join; to our company",
+                "hire; on the team",
+                "bring; on board"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "At the end of the sentence “When did this happen?”, the intonation:",
+              "options": [
+                "goes up",
+                "remains flat throughout the sentence",
+                "goes down"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "I ____ to become an athlete when I was younger.",
+              "options": [
+                "have wanted",
+                "want",
+                "wanted"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "I always ____ to go to Chile. Hopefully, I’ll get a chance to do it one day.",
+              "options": [
+                "wanted",
+                "am wanting",
+                "have wanted"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "I ____ this man for 10 years now.",
+              "options": [
+                "knew",
+                "have known",
+                "know"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "question": "Can you see that woman over there? She ____ here since 10am.",
+              "options": [
+                "has been",
+                "have been",
+                "was"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "We ____ two years building this project and we finally finished it.",
+              "options": [
+                "have spent",
+                "spend",
+                "spent"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "question": "— Look at the new VR helmet I bought! — Wow! How much ____?",
+              "options": [
+                "has it costed you",
+                "does it cost you",
+                "did it cost you?"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "question": "50 people ____ their jobs since this morning.",
+              "options": [
+                "have quit",
+                "quit",
+                "are quitting"
+              ],
+              "correctIndex": 0
+            }
+          ]
+        },
+        {
+          "id": "quiz_summary_llm_02",
+          "type": "llm_summary_feedback",
+          "prompt": "Generate a short summary of the student's performance in Lesson 2.",
+          "llmCheck": {
+            "systemPrompt": "You receive the student's results for Lesson 2 (vocabulary, grammar, pronunciation/intonation, speaking and writing). 1) Mention 2 strengths. 2) Mention 2 areas to improve. 3) Give 2 concrete recommendations for the next lesson. Use simple, motivating English.",
+            "scoringDimensions": [],
+            "maxScore": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit_glossary_startup_words",
+      "type": "glossary",
+      "title": "Glossary of Technical words",
+      "description": "Key startup and business words commonly used in the tech industry.",
+      "order": 9,
+      "terms": [
+        {
+          "word": "Startup",
+          "definition": "A newly established business. A software startup valued at more than one billion dollars is called a \"unicorn\", implying that such cases are extremely rare."
+        },
+        {
+          "word": "Shareholder",
+          "definition": "An owner of shares in a company."
+        },
+        {
+          "word": "Incubator",
+          "definition": "An organization that supports and develops early-stage companies."
+        },
+        {
+          "word": "Accelerator",
+          "definition": "An organization that provides startups with support services and funding opportunities."
+        },
+        {
+          "word": "Pitch deck",
+          "definition": "A presentation used to pitch a business idea or company, usually to investors."
+        },
+        {
+          "word": "API (Application Programming Interface)",
+          "definition": "A set of programming code that enables data transmission between software products."
+        },
+        {
+          "word": "CEO (Chief Executive Officer)",
+          "definition": "The highest-ranking executive in a company, responsible for major managerial decisions."
+        },
+        {
+          "word": "MVP (Minimum Viable Product)",
+          "definition": "A product version with just enough features to be usable by early customers."
+        },
+        {
+          "word": "VC (Venture Capital)",
+          "definition": "A type of financing that investors provide to startups and small businesses."
+        },
+        {
+          "word": "Bootstrap",
+          "definition": "To start and grow a business using minimal financial resources."
+        },
+        {
+          "word": "Scale up",
+          "definition": "To increase the production capacity or growth of a company or system."
+        },
+        {
+          "word": "Middleman",
+          "definition": "An inwordediary who buys goods from producers and sells them to retailers or consumers."
+        }
+      ]
+    }
+  ]
+}

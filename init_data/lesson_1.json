@@ -1576,6 +1576,51 @@
           }
         }
       ]
+    },
+    {
+      "id": "unit_glossary",
+      "type": "glossary",
+      "title": "Glossary of Technical words",
+      "description": "Key technical words used in the IT industry.",
+      "order": 9,
+      "glossary": [
+        {
+          "word": "UX (User Experience)",
+          "definition": "The overall experience of a person using a product, especially how easy or pleasing it is to use."
+        },
+        {
+          "word": "UI (User Interface)",
+          "definition": "The screens, pages and visual elements like buttons and icons that allow a user to interact with a product."
+        },
+        {
+          "word": "HTML",
+          "definition": "A standardized markup language that defines the structure of web pages."
+        },
+        {
+          "word": "CSS",
+          "definition": "A style sheet language used to describe the presentation of documents written in HTML."
+        },
+        {
+          "word": "JavaScript",
+          "definition": "A programming language that enables interactive web pages and is a core technology of the web."
+        },
+        {
+          "word": "Machine learning",
+          "definition": "A field of computer science where systems learn from data without explicit programming."
+        },
+        {
+          "word": "CI (Continuous Integration)",
+          "definition": "A development practice where code changes are frequently integrated and automatically tested."
+        },
+        {
+          "word": "CD (Continuous Delivery)",
+          "definition": "Automation that allows code to be built, tested and deployed to different environments."
+        },
+        {
+          "word": "Distributed ledger",
+          "definition": "A synchronized and shared digital database distributed across multiple locations."
+        }
+      ]
     }
   ]
 }
