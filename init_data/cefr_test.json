@@ -1,0 +1,787 @@
+{
+  "_meta": {
+    "schema": "neurotutor.lesson.v1",
+    "short_description": "Placement test (CEFR A1–C1) with 50 questions; reuses existing lesson activity types (multiple_choice, gap_fill, word_order, error_correction, open_answer, speaking_prompt) and includes optional audio media for listening items.",
+    "total_questions": 50,
+    "distribution": {
+      "A1": 8,
+      "A2": 10,
+      "B1": 12,
+      "B2": 12,
+      "C1": 8
+    },
+    "sources": [
+      "",
+      ""
+    ]
+  },
+  "index": 0,
+  "title": "English Placement Test (A1–C1)",
+  "slug": "english-placement-test",
+  "lang_level": [
+    "A1",
+    "C1"
+  ],
+  "estimatedTimeMinutes": 35,
+  "agenda": {
+    "Core skills": {
+      "order_id": 1,
+      "description": "Grammar, vocabulary, reading, listening, writing, speaking."
+    }
+  },
+  "units": [
+    {
+      "id": "unit_placement_test",
+      "type": "quiz",
+      "title": "Placement Test",
+      "description": "Answer questions across skills. Some tasks are auto-scored; writing and speaking are checked by LLM.",
+      "order": 1,
+      "activities": [
+        {
+          "id": "pt_multiple_choice_01",
+          "type": "multiple_choice",
+          "prompt": "Choose the best answer.",
+          "items": [
+            {
+              "id": "A1_G_01",
+              "level": "A1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: I ____ a student.",
+              "options": [
+                "am",
+                "is",
+                "are"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "A1_G_02",
+              "level": "A1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct word: This is ____ apple.",
+              "options": [
+                "a",
+                "an",
+                "the"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "A1_V_01",
+              "level": "A1",
+              "skill": "vocabulary",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct word: I drink ____ in the morning.",
+              "options": [
+                "milk",
+                "book",
+                "chair"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "A1_G_03",
+              "level": "A1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: She ____ from Italy.",
+              "options": [
+                "am",
+                "is",
+                "are"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "A1_R_01",
+              "level": "A1",
+              "skill": "reading",
+              "task_type": "multiple_choice",
+              "question": "Read: 'Tom has a sister. Her name is Anna.' What is the girl's name?",
+              "options": [
+                "Tom",
+                "Anna",
+                "Sister"
+              ],
+              "correctIndex": 1,
+              "context": "Tom has a sister. Her name is Anna."
+            },
+            {
+              "id": "A2_G_01",
+              "level": "A2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: He ____ to work by bus every day.",
+              "options": [
+                "go",
+                "goes",
+                "going"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "A2_G_02",
+              "level": "A2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: We ____ TV right now.",
+              "options": [
+                "watch",
+                "watches",
+                "are watching"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "id": "A2_V_01",
+              "level": "A2",
+              "skill": "vocabulary",
+              "task_type": "multiple_choice",
+              "question": "Choose the best word: I need to ____ an email to my teacher.",
+              "options": [
+                "send",
+                "cook",
+                "drive"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "A2_R_01",
+              "level": "A2",
+              "skill": "reading",
+              "task_type": "multiple_choice",
+              "question": "Read: 'The museum opens at 10 a.m. and closes at 6 p.m.' When does it open?",
+              "options": [
+                "At 6 p.m.",
+                "At 10 a.m.",
+                "At 8 a.m."
+              ],
+              "correctIndex": 1,
+              "context": "The museum opens at 10 a.m. and closes at 6 p.m."
+            },
+            {
+              "id": "A2_G_03",
+              "level": "A2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct question: ____ you like coffee?",
+              "options": [
+                "Do",
+                "Does",
+                "Are"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "A2_G_04",
+              "level": "A2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: There ____ two dogs in the park.",
+              "options": [
+                "is",
+                "are",
+                "be"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "B1_G_01",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: I ____ to Paris two years ago.",
+              "options": [
+                "go",
+                "went",
+                "have gone"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "B1_G_02",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct word: She has ____ finished her homework.",
+              "options": [
+                "just",
+                "yet",
+                "ever"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "B1_G_03",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct option: If it rains, we ____ at home.",
+              "options": [
+                "stay",
+                "stayed",
+                "will stay"
+              ],
+              "correctIndex": 2
+            },
+            {
+              "id": "B1_V_01",
+              "level": "B1",
+              "skill": "vocabulary",
+              "task_type": "multiple_choice",
+              "question": "Choose the best phrasal verb: Please ____ the form before you submit it.",
+              "options": [
+                "fill in",
+                "turn on",
+                "look after"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "B1_R_01",
+              "level": "B1",
+              "skill": "reading",
+              "task_type": "main_idea",
+              "question": "Read: 'Mark moved to a new city for work. At first he felt lonely, but he joined a sports club and made friends.' What is the main idea?",
+              "options": [
+                "Mark hates his job.",
+                "Mark adjusted and made friends.",
+                "Mark wants to move again."
+              ],
+              "correctIndex": 1,
+              "context": "Mark moved to a new city for work. At first he felt lonely, but he joined a sports club and made friends."
+            },
+            {
+              "id": "B1_R_02",
+              "level": "B1",
+              "skill": "reading",
+              "task_type": "multiple_choice",
+              "question": "Read: 'You should back up your files regularly.' What does 'back up' mean?",
+              "options": [
+                "delete",
+                "make a copy",
+                "print"
+              ],
+              "correctIndex": 1,
+              "context": "You should back up your files regularly."
+            },
+            {
+              "id": "B1_G_04",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: I ____ working here since 2023.",
+              "options": [
+                "am",
+                "have been",
+                "was"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "B2_G_01",
+              "level": "B2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: The report ____ by the manager yesterday.",
+              "options": [
+                "was approved",
+                "approved",
+                "is approving"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "B2_G_02",
+              "level": "B2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct option: I wish I ____ more time for hobbies.",
+              "options": [
+                "have",
+                "had",
+                "will have"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "B2_G_03",
+              "level": "B2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct form: If I ____ enough money, I would travel more.",
+              "options": [
+                "have",
+                "had",
+                "will have"
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "B2_G_04",
+              "level": "B2",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct connector: I took the job ____ the salary was lower.",
+              "options": [
+                "although",
+                "because",
+                "so"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "B2_V_01",
+              "level": "B2",
+              "skill": "vocabulary",
+              "task_type": "multiple_choice",
+              "question": "Choose the best word: We need to ____ a decision by Friday.",
+              "options": [
+                "reach",
+                "reach out",
+                "make up"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "B2_V_02",
+              "level": "B2",
+              "skill": "vocabulary",
+              "task_type": "multiple_choice",
+              "question": "Choose the best phrase: The new policy will ____ costs.",
+              "options": [
+                "reduce",
+                "rise",
+                "grow up"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "B2_R_01",
+              "level": "B2",
+              "skill": "reading",
+              "task_type": "inference",
+              "question": "Read: 'Many employees prefer hybrid work because it offers flexibility, but it can also blur the line between work and personal life.' What is implied?",
+              "options": [
+                "Hybrid work is always better.",
+                "Hybrid work has pros and cons.",
+                "Employees dislike flexibility."
+              ],
+              "correctIndex": 1,
+              "context": "Many employees prefer hybrid work because it offers flexibility, but it can also blur the line between work and personal life."
+            },
+            {
+              "id": "B2_R_02",
+              "level": "B2",
+              "skill": "reading",
+              "task_type": "main_idea",
+              "question": "Choose the best summary: 'Small, consistent improvements often lead to better results than rare major efforts.'",
+              "options": [
+                "Big efforts are best.",
+                "Consistency matters more than intensity.",
+                "Results depend only on talent."
+              ],
+              "correctIndex": 1,
+              "context": "Small, consistent improvements often lead to better results than rare major efforts."
+            },
+            {
+              "id": "C1_G_01",
+              "level": "C1",
+              "skill": "grammar",
+              "task_type": "multiple_choice",
+              "question": "Choose the correct option: Not only ____ the deadline missed, but the budget also exceeded.",
+              "options": [
+                "was",
+                "were",
+                "did"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "C1_G_02",
+              "level": "C1",
+              "skill": "grammar",
+              "task_type": "grammar_transformation",
+              "question": "Choose the best rewrite (same meaning): 'People who live in big cities often commute long distances.'",
+              "options": [
+                "Living in big cities, people often commute long distances.",
+                "People living in big cities often commute long distances.",
+                "People live big cities often commute long distances."
+              ],
+              "correctIndex": 1
+            },
+            {
+              "id": "C1_V_01",
+              "level": "C1",
+              "skill": "vocabulary",
+              "task_type": "multiple_choice",
+              "question": "Choose the best word: The committee reached a ____ that the policy should be revised.",
+              "options": [
+                "consensus",
+                "conscience",
+                "consequence"
+              ],
+              "correctIndex": 0
+            },
+            {
+              "id": "C1_R_01",
+              "level": "C1",
+              "skill": "reading",
+              "task_type": "tone",
+              "question": "Read: 'While the proposal is innovative, it relies on assumptions that have not been validated.' What is the tone?",
+              "options": [
+                "Fully supportive",
+                "Cautiously critical",
+                "Completely indifferent"
+              ],
+              "correctIndex": 1,
+              "context": "While the proposal is innovative, it relies on assumptions that have not been validated."
+            },
+            {
+              "id": "C1_R_02",
+              "level": "C1",
+              "skill": "reading",
+              "task_type": "main_idea",
+              "question": "Which sentence best reflects the author's claim: 'Regulation can stifle innovation, yet it may also prevent harm.'",
+              "options": [
+                "Regulation is always harmful.",
+                "Regulation has trade-offs.",
+                "Innovation does not need rules."
+              ],
+              "correctIndex": 1,
+              "context": "Regulation can stifle innovation, yet it may also prevent harm."
+            }
+          ]
+        },
+        {
+          "id": "pt_listening_mc_01",
+          "type": "multiple_choice",
+          "prompt": "Listen and choose the best answer.",
+          "items": [
+            {
+              "id": "A2_L_01",
+              "level": "A2",
+              "skill": "listening",
+              "task_type": "multiple_choice",
+              "media": {
+                "audioUrl": "pt_a2_l_01.mp3",
+                "audioText": "Hi, Anna. Just a quick reminder about tomorrow’s meeting.\nSure. What time is it?\nIt starts at nine thirty in the morning.\nNine thirty. Great, thank you.\nNo problem. See you then."
+              },
+              "question": "What time is the meeting?",
+              "options": [
+                "9:00",
+                "9:30",
+                "10:00"
+              ],
+              "correctIndex": 1,
+              "transcript_hint": "We'll start at nine thirty in the morning."
+            },
+            {
+              "id": "B2_L_01",
+              "level": "B2",
+              "skill": "listening",
+              "task_type": "multiple_choice",
+              "media": {
+                "audioUrl": "pt_b2_l_01.mp3",
+                "audioText": "I actually enjoyed my previous job, and the team was great. But after a couple of years, I felt I wasn’t learning much anymore. I wanted more responsibility and clearer opportunities to grow professionally. The new role offers training, bigger projects, and a chance to lead a small team. So I changed jobs mainly for career development, not because of location or remote work."
+              },
+              "question": "Why did the speaker change jobs?",
+              "options": [
+                "To work remotely",
+                "For career growth",
+                "Because of relocation"
+              ],
+              "correctIndex": 1,
+              "transcript_hint": "I wanted more opportunities to develop professionally."
+            }
+          ]
+        },
+        {
+          "id": "pt_gap_fill_01",
+          "type": "gap_fill",
+          "prompt": "Complete the sentences.",
+          "items": [
+            {
+              "id": "A1_GAP_01",
+              "level": "A1",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "My name ____ Ali.",
+              "correct": "is"
+            },
+            {
+              "id": "A1_GAP_02",
+              "level": "A1",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "I ____ in Almaty.",
+              "correct": "live"
+            },
+            {
+              "id": "A1_GAP_03",
+              "level": "A1",
+              "skill": "vocabulary",
+              "task_type": "gap_fill",
+              "sentence": "I go to ____ every day (school/work).",
+              "correct": "school"
+            },
+            {
+              "id": "A2_GAP_01",
+              "level": "A2",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "She ____ (not / like) spicy food.",
+              "correct": "does not like"
+            },
+            {
+              "id": "A2_GAP_02",
+              "level": "A2",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "They ____ (play) football at the moment.",
+              "correct": "are playing"
+            },
+            {
+              "id": "B1_GAP_01",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "By the time I arrived, they ____ (already / start) the meeting.",
+              "correct": "had already started"
+            },
+            {
+              "id": "B1_GAP_02",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "I’m tired because I ____ (work) all day.",
+              "correct": "have been working"
+            },
+            {
+              "id": "B2_GAP_01",
+              "level": "B2",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "Hardly ____ I arrived when the meeting started.",
+              "correct": "had"
+            },
+            {
+              "id": "C1_GAP_01",
+              "level": "C1",
+              "skill": "grammar",
+              "task_type": "gap_fill",
+              "sentence": "Had I known about the change, I ____ (adjust) the plan earlier.",
+              "correct": "would have adjusted"
+            }
+          ]
+        },
+        {
+          "id": "pt_word_order_01",
+          "type": "word_order",
+          "prompt": "Put the words in the correct order.",
+          "items": [
+            {
+              "id": "B1_WO_01",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "word_order",
+              "words": [
+                "I",
+                "have",
+                "never",
+                "been",
+                "to",
+                "London",
+                "."
+              ],
+              "correct": "I have never been to London."
+            },
+            {
+              "id": "B1_WO_02",
+              "level": "B1",
+              "skill": "grammar",
+              "task_type": "word_order",
+              "words": [
+                "What",
+                "were",
+                "you",
+                "doing",
+                "when",
+                "I",
+                "called",
+                "you",
+                "?"
+              ],
+              "correct": "What were you doing when I called you?"
+            }
+          ]
+        },
+        {
+          "id": "pt_error_correction_01",
+          "type": "error_correction",
+          "prompt": "Correct the mistakes in the sentences.",
+          "items": [
+            {
+              "id": "B2_EC_01",
+              "level": "B2",
+              "skill": "grammar",
+              "task_type": "error_correction",
+              "inputType": [
+                "text"
+              ],
+              "sentence": "She suggested to go to the office earlier.",
+              "correct": "She suggested going to the office earlier."
+            }
+          ]
+        },
+        {
+          "id": "A2_W_01",
+          "level": "A2",
+          "skill": "writing",
+          "task_type": "sentence",
+          "type": "open_answer",
+          "prompt": "Write one sentence about your daily routine (8–12 words).",
+          "inputType": [
+            "text"
+          ],
+          "rubric": [
+            "basic word order",
+            "present simple",
+            "spelling"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English teacher. The student writes one short sentence about their daily routine. 1) Check if it is understandable and grammatically acceptable for A2. 2) Correct it (one improved sentence). 3) Give a score 0-3.",
+            "scoringDimensions": [
+              "accuracy",
+              "clarity"
+            ],
+            "maxScore": 3
+          }
+        },
+        {
+          "id": "B1_S_01",
+          "level": "B1",
+          "skill": "speaking",
+          "task_type": "dialogue",
+          "type": "speaking_prompt",
+          "show_question_mode": "single",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Describe a problem you had recently and how you solved it (45–60 seconds).",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Last week I had a problem with my laptop. I restarted it, updated the system, and it worked again.",
+              "targetPatterns": [
+                "I had a problem with ...",
+                "I solved it by ...",
+                "At first ... but then ..."
+              ]
+            }
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English speaking examiner. The student describes a recent problem and a solution. 1) Estimate level (A2/B1/B2) in one sentence. 2) Correct up to 3 key grammar mistakes. 3) Give 2 tips to improve. Keep it short.",
+            "scoringDimensions": [
+              "fluency",
+              "grammar",
+              "vocabulary_range",
+              "coherence"
+            ],
+            "maxScore": 10
+          }
+        },
+        {
+          "id": "B2_W_01",
+          "level": "B2",
+          "skill": "writing",
+          "task_type": "short_text",
+          "type": "open_answer",
+          "prompt": "Write 120–150 words: advantages and disadvantages of remote work. Use at least two linking words (however, therefore, although, in addition).",
+          "inputType": [
+            "text"
+          ],
+          "rubric": [
+            "structure",
+            "argumentation",
+            "grammar",
+            "linking_words"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English writing examiner. The student writes about pros and cons of remote work (120-150 words). 1) Give a score 0-10. 2) Highlight up to 5 issues (grammar/word choice/cohesion). 3) Provide one improved paragraph (80-100 words).",
+            "scoringDimensions": [
+              "coherence",
+              "grammar",
+              "lexis",
+              "task_fulfillment"
+            ],
+            "maxScore": 10
+          }
+        },
+        {
+          "id": "C1_W_01",
+          "level": "C1",
+          "skill": "writing",
+          "task_type": "opinion",
+          "type": "open_answer",
+          "prompt": "Write 180–220 words: Is artificial intelligence more likely to be a threat or an opportunity for society? Support your view with examples and address one counterargument.",
+          "inputType": [
+            "text"
+          ],
+          "rubric": [
+            "argumentation",
+            "nuance",
+            "cohesion",
+            "vocabulary_range",
+            "accuracy"
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are a C1-level English writing examiner. Evaluate the student's opinion essay (180-220 words). 1) Provide scores (0-5) for coherence, grammar accuracy, vocabulary range, and argumentation. 2) Give 3 targeted improvement notes. 3) Provide a revised version (120-150 words) that keeps the student's meaning but improves style and accuracy.",
+            "scoringDimensions": [
+              "coherence",
+              "grammar",
+              "vocabulary",
+              "argumentation"
+            ],
+            "maxScore": 20
+          }
+        },
+        {
+          "id": "C1_S_01",
+          "level": "C1",
+          "skill": "speaking",
+          "task_type": "monologue",
+          "type": "speaking_prompt",
+          "show_question_mode": "single",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Speak for 60–90 seconds: explain one complex idea you learned recently and why it matters.",
+              "inputType": [
+                "audio"
+              ],
+              "modelAnswer": "Recently I learned about how small changes in incentives can reshape behavior in organizations, which matters because it affects performance and culture.",
+              "targetPatterns": [
+                "One concept I learned is ...",
+                "It matters because ...",
+                "On the one hand ... on the other hand ..."
+              ]
+            }
+          ],
+          "llmCheck": {
+            "systemPrompt": "You are an English speaking examiner (C1). Evaluate the student's monologue. 1) Provide scores (0-5) for fluency, grammar, vocabulary range, and coherence. 2) Provide 3 concise notes for improvement with better phrase suggestions.",
+            "scoringDimensions": [
+              "fluency",
+              "grammar",
+              "vocabulary_range",
+              "coherence"
+            ],
+            "maxScore": 20
+          }
+        }
+      ]
+    }
+  ]
+}
