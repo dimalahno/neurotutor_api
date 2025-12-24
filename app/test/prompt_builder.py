@@ -88,13 +88,14 @@ Conversation starters:
     return prompt
 
 
-def build_system_prompt_from_lesson():
-    ctx = compact_context_from_lesson()
+async def build_system_prompt_from_lesson(lesson_id: str):
+    ctx = await compact_context_from_lesson(lesson_id)
     system_prompt = build_system_prompt(ctx)
 
     assert "LESSON CONTEXT" in system_prompt
     assert "Vocabulary" in system_prompt
 
-    print(system_prompt)
+    return system_prompt
 
-build_system_prompt_from_lesson()
+# 694395b45e2a9fe2fe6d4205
+# 69413f53fb9995b3450fad1b

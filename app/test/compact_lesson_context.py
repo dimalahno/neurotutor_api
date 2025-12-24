@@ -1,6 +1,7 @@
 import json
 from logging import Logger
-from pathlib import Path
+
+from app.routers.content import get_lesson
 
 logger = Logger(__name__)
 
@@ -164,13 +165,9 @@ def extract_compact_context(lesson: dict) -> dict:
     }
 
 
-def compact_context_from_lesson():
-    path = Path("../../init_data/lesson_1.json")
-    lesson = json.loads(path.read_text(encoding="utf-8"))
-
+async def compact_context_from_lesson(lesson_id: str):
+    lesson = await get_lesson(lesson_id)
     ctx = extract_compact_context(lesson)
 
     logger.info(json.dumps(ctx, ensure_ascii=False, indent=2))
     return ctx
-
-compact_context_from_lesson()
