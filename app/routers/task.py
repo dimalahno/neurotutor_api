@@ -4,8 +4,8 @@ from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 
 from app.schemas.audio_check import AudioCheckMeta
 from app.schemas.text_check import TextCheckResponse, TextCheckRequest
-from app.services.llm_check_service import transcribe_audio, check_text
-from app.services.llm_check_service import transcribe_and_score
+from app.services.llm_service import transcribe_audio, check_text
+from app.services.llm_service import transcribe_and_score
 
 router = APIRouter(prefix="/task", tags=["task"])
 
