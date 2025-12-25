@@ -7,8 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.mongo_cfg import mongo_db
 from app.services.user_service import UserService
-from app.test.compact_lesson_context import extract_compact_context
-from app.test.prompt_builder import build_system_prompt
+from app.services.llm_utils.compact_lesson_context import extract_compact_context
+from app.services.llm_utils.prompt_builder import build_system_prompt
 
 logger = Logger(__name__)
 
