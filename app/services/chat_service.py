@@ -52,16 +52,15 @@ async def _call_llm(system_prompt: str, messages: List[Dict[str, str]]) -> str:
     try:
         response = await client.responses.create(
             model=DEFAULT_MODEL,
-            messages=[{"role": "system", "content": system_prompt}, *messages],
+            instructions=system_prompt,   # системный/девелоперский промпт
+            input=messages,               # история (user/assistant)
             max_output_tokens=DEFAULT_OUTPUT_TOKENS,
             temperature=0.6,
         )
         return (response.output_text or "").strip()
     except Exception as e:
         logger.exception("LLM call failed")
-        raise HTTPException(
-            status_code=status.HTTP_502_BAD_GATEWAY, detail=f"LLM error: {e}"
-        )
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"LLM error: {e}")
 
 
 async def start_chat(session: AsyncSession, lesson_id: str, user_id: int) -> Dict[str, Any]:
