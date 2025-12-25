@@ -2,9 +2,6 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from app.test.compact_lesson_context import compact_context_from_lesson
-
-
 def _bullet_lines(items: List[str], prefix: str = "- ") -> str:
     return "\n".join(f"{prefix}{x}" for x in items if x and str(x).strip())
 
@@ -86,16 +83,3 @@ Conversation starters:
 """.strip()
 
     return prompt
-
-
-async def build_system_prompt_from_lesson(lesson_id: str):
-    ctx = await compact_context_from_lesson(lesson_id)
-    system_prompt = build_system_prompt(ctx)
-
-    assert "LESSON CONTEXT" in system_prompt
-    assert "Vocabulary" in system_prompt
-
-    return system_prompt
-
-# 694395b45e2a9fe2fe6d4205
-# 69413f53fb9995b3450fad1b

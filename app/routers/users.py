@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.db_cfg import get_async_session
-from app.core.deps import get_session, get_user_repo
+from app.core.deps import get_session
 from app.schemas.user import UserCreate, UserOut, UserUpdate
 from app.services.user_service import UserService
 
@@ -60,8 +60,8 @@ async def delete_user(user_id: int, session: AsyncSession = Depends(get_session)
 
 @router.get("/{user_id}", response_model=UserOut)
 async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
-    repo = get_user_repo()
-    user = await repo.get(session, user_id)
+    svc = UserService()
+    user = await svc.get_user_by_id(session, user_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return user
@@ -69,5 +69,5 @@ async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
 
 @router.get("/", response_model=List[UserOut])
 async def list_users(session: AsyncSession = Depends(get_session)):
-    repo = get_user_repo()
-    return await repo.get_all(session)
+    svc = UserService()
+    return await svc.get_all_users(session)

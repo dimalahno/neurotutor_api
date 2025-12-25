@@ -17,6 +17,12 @@ class UserService:
         self.user_repo = user_repo or UserRepository()
         self.role_repo = role_repo or RoleDictionaryRepository()
 
+    async def get_all_users(self, session: AsyncSession) -> list[User]:
+        return await self.user_repo.get_all(session)
+
+    async def get_user_by_id(self, session: AsyncSession, user_id: int) -> Optional[User]:
+        return await self.user_repo.get(session, user_id)
+
 
     async def create_user(
         self,
