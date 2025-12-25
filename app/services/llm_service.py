@@ -83,11 +83,11 @@ async def transcribe_and_score(file: UploadFile, meta: AudioCheckMeta) -> dict:
 
         # 2) LLM evaluation (mini)
         eval_resp = await client.responses.create(
-            model="gpt-4.1-mini",
+            model=DEFAULT_MODEL,
             instructions=meta.systemPrompt,
             input=_build_audio_input(meta, transcript),
+            max_output_tokens=DEFAULT_OUTPUT_TOKENS,
             temperature=0.2,
-            max_output_tokens=220,
         )
 
         return {
