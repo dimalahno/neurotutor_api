@@ -1,12 +1,23 @@
+import logging
 import os
 import tempfile
+from typing import List, Dict
+
 from openai import AsyncOpenAI
 from fastapi import UploadFile, HTTPException
+from starlette import status
+
 from app.config.main_cfg import settings
 from app.schemas.audio_check import AudioCheckMeta
 
 client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
+logger = logging.getLogger(__name__)
+
+
+DEFAULT_HISTORY_LIMIT = 20
+DEFAULT_MODEL = "gpt-4.1-mini"
+DEFAULT_OUTPUT_TOKENS = 300
 
 async def transcribe_audio(file: UploadFile) -> str:
     suffix = os.path.splitext(file.filename or "")[1] or ".webm"
@@ -101,11 +112,30 @@ def _build_text_input(text: str, scoring_dimensions: list[str]) -> str:
     return f"Student text:\n{text}\n\nScoring dimensions:{dims}"
 
 async def check_text(text: str, system_prompt: str, scoring_dimensions: list[str]) -> str:
-    resp = await client.responses.create(
-        model="gpt-4.1-mini",
-        instructions=system_prompt or "You are an English teacher. Give short feedback.",
-        input=_build_text_input(text, scoring_dimensions),
-        temperature=0.2,
-        max_output_tokens=220,
-    )
-    return resp.output_text.strip()
+    try:
+        response = await client.responses.create(
+            model=DEFAULT_MODEL,
+            instructions=system_prompt or "You are an English teacher. Give short feedback.",
+            input=_build_text_input(text, scoring_dimensions),
+            max_output_tokens=DEFAULT_OUTPUT_TOKENS,
+            temperature=0.2,
+        )
+        return (response.output_text or "").strip()
+    except Exception as e:
+        logger.exception("LLM call failed")
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"LLM error: {e}")
+
+
+async def chat_client(system_prompt: str, messages: List[Dict[str, str]]) -> str:
+    try:
+        response = await client.responses.create(
+            model=DEFAULT_MODEL,
+            instructions=system_prompt,
+            input=messages,
+            max_output_tokens=DEFAULT_OUTPUT_TOKENS,
+            temperature=0.6,
+        )
+        return (response.output_text or "").strip()
+    except Exception as e:
+        logger.exception("LLM call failed")
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"LLM error: {e}")

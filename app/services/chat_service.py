@@ -9,7 +9,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.mongo_cfg import mongo_db
-from app.services.llm_service import client
+from app.services.llm_service import chat_client
 from app.services.llm_utils.compact_lesson_context import extract_compact_context
 from app.services.llm_utils.prompt_builder import build_system_prompt
 from app.services.user_service import UserService
@@ -18,9 +18,6 @@ logger = logging.getLogger(__name__)
 
 CHAT_COLLECTION = mongo_db.chat_sessions
 DEFAULT_HISTORY_LIMIT = 20
-DEFAULT_MODEL = "gpt-4.1-mini"
-DEFAULT_OUTPUT_TOKENS = 300
-
 
 def _validate_object_id(raw_id: str) -> ObjectId:
     try:
@@ -48,21 +45,6 @@ async def _fetch_lesson_doc(lesson_id: str) -> Dict[str, Any]:
     return doc
 
 
-async def _call_llm(system_prompt: str, messages: List[Dict[str, str]]) -> str:
-    try:
-        response = await client.responses.create(
-            model=DEFAULT_MODEL,
-            instructions=system_prompt,   # системный/девелоперский промпт
-            input=messages,               # история (user/assistant)
-            max_output_tokens=DEFAULT_OUTPUT_TOKENS,
-            temperature=0.6,
-        )
-        return (response.output_text or "").strip()
-    except Exception as e:
-        logger.exception("LLM call failed")
-        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"LLM error: {e}")
-
-
 async def start_chat(session: AsyncSession, lesson_id: str, user_id: int) -> Dict[str, Any]:
     svc = UserService()
     user = await svc.get_user_by_id(session, user_id)
@@ -73,7 +55,7 @@ async def start_chat(session: AsyncSession, lesson_id: str, user_id: int) -> Dic
     ctx = extract_compact_context(lesson)
     system_prompt = build_system_prompt(ctx)
 
-    greeting = await _call_llm(
+    greeting = await chat_client(
         system_prompt,
         [
             {
@@ -128,7 +110,7 @@ async def send_chat_message(session: AsyncSession, session_id: str, text: str) -
         for m in history[-DEFAULT_HISTORY_LIMIT :]
     ]
 
-    assistant_reply = await _call_llm(system_prompt, llm_messages)
+    assistant_reply = await chat_client(system_prompt, llm_messages)
 
     history.append({"role": "assistant", "text": assistant_reply})
 
