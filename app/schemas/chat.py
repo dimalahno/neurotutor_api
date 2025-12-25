@@ -7,4 +7,4 @@ class ChatMessage(BaseModel):
 
 class ChatStart(BaseModel):
     lesson_id: str = Field(..., min_length=1, description="Lesson ID")
-    user_id: int = Field(..., min_length=1, description="User ID")
+    user_id: int = Field(..., description="User ID")
