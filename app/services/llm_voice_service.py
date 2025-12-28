@@ -62,14 +62,15 @@ async def create_webrtc_call(*, sdp_offer: str, session_config: Dict[str, Any]) 
     if not sdp_offer or not sdp_offer.strip():
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="SDP offer is empty")
 
-    url = f"{OPENAI_BASE_URL}/realtime/calls"  # :contentReference[oaicite:9]{index=9}
+    url = f"{OPENAI_BASE_URL}/realtime/calls"
     headers = {"Authorization": f"Bearer {settings.OPENAI_API_KEY}"}
 
-    # multipart form: sdp as application/sdp, session as application/json :contentReference[oaicite:10]{index=10}
-    files = [
-        ("sdp", ("offer.sdp", sdp_offer, "application/sdp")),
-        ("session", ("session.json", json.dumps(session_config), "application/json")),
-    ]
+    # ВАЖНО: поле sdp должно быть form field без filename (None, ...)
+    # Аналогично session: строка JSON, тоже без filename
+    files = {
+        "sdp": (None, sdp_offer, "application/sdp"),
+        "session": (None, json.dumps(session_config), "application/json"),
+    }
 
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
@@ -79,15 +80,11 @@ async def create_webrtc_call(*, sdp_offer: str, session_config: Dict[str, Any]) 
             logger.error("Realtime create call failed: %s %s", resp.status_code, resp.text)
             raise HTTPException(
                 status_code=status.HTTP_502_BAD_GATEWAY,
-                detail=f"Realtime create call failed: {resp.status_code}",
+                detail=f"Realtime create call failed: {resp.status_code}: {resp.text}",
             )
 
         location = resp.headers.get("Location")
         call_id = _extract_call_id(location)
-        if not call_id:
-            # По докам Location должен быть, но если нет — всё равно вернём ответ SDP,
-            # а call_id пустой будет сигналом для логов/диагностики.
-            logger.warning("Realtime create call: missing/unknown Location header: %s", location)
 
         return RealtimeCallResult(call_id=call_id, sdp_answer=resp.text, location=location)
 
@@ -96,6 +93,7 @@ async def create_webrtc_call(*, sdp_offer: str, session_config: Dict[str, Any]) 
     except Exception as e:
         logger.exception("Realtime create call error")
         raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"Realtime error: {e}")
+
 
 
 async def hangup_call(call_id: str) -> None:
