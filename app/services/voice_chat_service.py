@@ -9,9 +9,9 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.mongo_cfg import mongo_db
-from app.services.llm_service import chat_client  # не меняем, просто используем :contentReference[oaicite:12]{index=12}
-from app.services.llm_utils.compact_lesson_context import extract_compact_context  # :contentReference[oaicite:13]{index=13}
-from app.services.llm_utils.prompt_builder import build_system_prompt  # :contentReference[oaicite:14]{index=14}
+from app.services.llm_service import chat_client
+from app.services.llm_utils.compact_lesson_context import extract_compact_context
+from app.services.llm_utils.prompt_builder import build_system_prompt
 from app.services.user_service import UserService
 
 from app.services.llm_voice_service import (

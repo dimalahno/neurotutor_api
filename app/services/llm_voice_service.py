@@ -95,12 +95,31 @@ async def create_webrtc_call(*, sdp_offer: str, session_config: Dict[str, Any]) 
         raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"Realtime error: {e}")
 
 
+def normalize_call_id(raw: Optional[str]) -> str:
+    if not raw:
+        return ""
+    raw = raw.strip()
+
+    # Если приходит полный path или Location: /v1/realtime/calls/<id>
+    m = re.search(r"/realtime/calls/([^/?]+)", raw)
+    if m:
+        return m.group(1)
+
+    # Если приходит "calls/<id>" или "call/<id>"
+    m = re.search(r"(?:^|/)(?:calls?|call)/([^/?]+)$", raw)
+    if m:
+        return m.group(1)
+
+    # Если это уже похоже на чистый id — возвращаем как есть
+    return raw
+
 
 async def hangup_call(call_id: str) -> None:
+    call_id = normalize_call_id(call_id)
     if not call_id:
         return
 
-    url = f"{OPENAI_BASE_URL}/realtime/calls/{call_id}/hangup"  # :contentReference[oaicite:11]{index=11}
+    url = f"{OPENAI_BASE_URL}/realtime/calls/{call_id}/hangup"
     headers = {"Authorization": f"Bearer {settings.OPENAI_API_KEY}"}
 
     try:
