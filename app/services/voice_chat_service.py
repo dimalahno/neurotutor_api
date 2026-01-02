@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 
 VOICE_COLLECTION = mongo_db.voice_sessions
 LESSONS_COLLECTION = mongo_db.lessons
+USER_NOT_FOUND_ERROR = HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
 
 def _validate_object_id(raw_id: str) -> ObjectId:
@@ -31,9 +32,6 @@ def _validate_object_id(raw_id: str) -> ObjectId:
         return ObjectId(raw_id)
     except Exception:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid ObjectId format")
-
-
-USER_NOT_FOUND_ERROR = HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
 
 async def _fetch_lesson_doc(lesson_id: str) -> Dict[str, Any]:
@@ -89,8 +87,8 @@ async def start_voice_chat(
             "greeting": greeting,
             "status": "created",
         },
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow(),
+        "created_at": datetime.now(),
+        "updated_at": datetime.now(),
     }
 
     result = await VOICE_COLLECTION.insert_one(doc)
@@ -137,7 +135,7 @@ async def create_call_from_offer(
         "realtime.model": model,
         "realtime.voice": voice,
         "state.status": "active",
-        "updated_at": datetime.utcnow(),
+        "updated_at": datetime.now(),
     }
     await VOICE_COLLECTION.update_one({"_id": oid}, {"$set": update_data})
 
@@ -170,8 +168,8 @@ async def stop_voice_chat(
 
     update_data = {
         "state.status": "ended",
-        "updated_at": datetime.utcnow(),
-        "ended_at": datetime.utcnow(),
+        "updated_at": datetime.now(),
+        "ended_at": datetime.now(),
     }
     await VOICE_COLLECTION.update_one({"_id": oid}, {"$set": update_data})
 
