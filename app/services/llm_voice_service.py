@@ -3,6 +3,7 @@ import logging
 import re
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
+from urllib.parse import urlparse
 
 import httpx
 from fastapi import HTTPException
@@ -31,9 +32,17 @@ class RealtimeCallResult:
 def _extract_call_id(location_header: Optional[str]) -> str:
     if not location_header:
         return ""
-    # Location обычно вида /v1/realtime/calls/<call_id>
-    m = re.search(r"/realtime/calls/([^/?]+)", location_header)
-    return m.group(1) if m else ""
+
+    path = urlparse(location_header).path  # работает и для полного URL, и для "/v1/..."
+    last = path.rstrip("/").rsplit("/", 1)[-1]
+
+    logger.info("Extracted call id: %s", last)
+
+    # last должен быть реальным id, а не "calls"
+    if not last or last == "calls":
+        return ""
+
+    return last
 
 
 def build_realtime_session_config(
@@ -86,6 +95,15 @@ async def create_webrtc_call(*, sdp_offer: str, session_config: Dict[str, Any]) 
         location = resp.headers.get("Location")
         call_id = _extract_call_id(location)
 
+        logger.info("create_webrtc_call Realtime create call: %s", call_id)
+
+        if not call_id:
+            logger.error("Realtime create call: invalid Location header: %r", location)
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail="Realtime create call failed: invalid Location header (no call_id)",
+            )
+
         return RealtimeCallResult(call_id=call_id, sdp_answer=resp.text, location=location)
 
     except HTTPException:
@@ -98,42 +116,40 @@ async def create_webrtc_call(*, sdp_offer: str, session_config: Dict[str, Any]) 
 def normalize_call_id(raw: Optional[str]) -> str:
     if not raw:
         return ""
-    raw = raw.strip()
+    raw = raw.strip().rstrip("/")
 
-    # Если приходит полный path или Location: /v1/realtime/calls/<id>
-    m = re.search(r"/realtime/calls/([^/?]+)", raw)
-    if m:
-        return m.group(1)
+    # если прислали URL или path — берём последний сегмент
+    if "/" in raw:
+        raw = raw.rsplit("/", 1)[-1]
 
-    # Если приходит "calls/<id>" или "call/<id>"
-    m = re.search(r"(?:^|/)(?:calls?|call)/([^/?]+)$", raw)
-    if m:
-        return m.group(1)
+    # отсечь очевидный мусор
+    if raw in {"calls", "call", "realtime", "v1", "hangup"}:
+        return ""
 
-    # Если это уже похоже на чистый id — возвращаем как есть
     return raw
 
 
 async def hangup_call(call_id: str) -> None:
     call_id = normalize_call_id(call_id)
+
+    logger.info("hangup_call Realtime hangup: %s", call_id)
+
     if not call_id:
         return
 
     url = f"{OPENAI_BASE_URL}/realtime/calls/{call_id}/hangup"
     headers = {"Authorization": f"Bearer {settings.OPENAI_API_KEY}"}
 
-    try:
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            resp = await client.post(url, headers=headers)
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.post(url, headers=headers)
 
-        if resp.status_code != 200:
-            logger.error("Realtime hangup failed: %s %s", resp.status_code, resp.text)
-            raise HTTPException(
-                status_code=status.HTTP_502_BAD_GATEWAY,
-                detail=f"Realtime hangup failed: {resp.status_code}",
-            )
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.exception("Realtime hangup error")
-        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"Realtime error: {e}")
+    if resp.status_code == 404:
+        logger.warning("Realtime hangup: call not found (already ended?) call_id=%s", call_id)
+        return
+
+    if resp.status_code != 200:
+        logger.error("Realtime hangup failed: %s %s", resp.status_code, resp.text)
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=f"Realtime hangup failed: {resp.status_code}",
+        )
