@@ -24,7 +24,6 @@ logger = logging.getLogger(__name__)
 
 VOICE_COLLECTION = mongo_db.voice_sessions
 LESSONS_COLLECTION = mongo_db.lessons
-USER_NOT_FOUND_ERROR = HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
 
 def _validate_object_id(raw_id: str) -> ObjectId:
@@ -53,7 +52,7 @@ async def start_voice_chat(
     svc = UserService()
     user = await svc.get_user_by_id(session, user_id)
     if not user:
-        raise USER_NOT_FOUND_ERROR
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     lesson = await _fetch_lesson_doc(lesson_id)
     ctx = extract_compact_context(lesson)
