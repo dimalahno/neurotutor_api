@@ -58,6 +58,14 @@ async def start_voice_chat(
     ctx = extract_compact_context(lesson)
     system_prompt = build_system_prompt(ctx)
 
+    system_prompt = (
+            system_prompt
+            + "\n\n"
+            + "LANGUAGE POLICY (STRICT): Always respond in English only (spoken and written), "
+              "regardless of the user's input language. If the user speaks Russian (or any other language), "
+              "silently translate it to English and answer in English. Never switch away from English."
+    )
+
     # Текстовый greeting — удобен для UI (и для первого client-event на data channel).
     # Голос "сам" не начнётся, пока клиент не пошлёт событие, поэтому greeting отдаём явно.
     greeting = await chat_client(
