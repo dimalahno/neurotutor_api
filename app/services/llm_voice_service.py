@@ -1,6 +1,5 @@
 import json
 import logging
-import re
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
 from urllib.parse import urlparse
@@ -15,12 +14,9 @@ logger = logging.getLogger(__name__)
 
 OPENAI_BASE_URL = "https://api.openai.com/v1"
 
-# из официальных примеров Realtime API :contentReference[oaicite:6]{index=6}
-DEFAULT_REALTIME_MODEL = "gpt-realtime"
+DEFAULT_REALTIME_MODEL = "gpt-realtime-mini"
 
-# пример из WebRTC guide :contentReference[oaicite:7]{index=7}
 DEFAULT_VOICE = "marin"
-
 
 @dataclass
 class RealtimeCallResult:
@@ -50,9 +46,8 @@ def build_realtime_session_config(
     instructions: str,
     model: str = DEFAULT_REALTIME_MODEL,
     voice: str = DEFAULT_VOICE,
-    max_output_tokens: int | str = 300,
+    max_output_tokens: int | str = "inf",
 ) -> Dict[str, Any]:
-    # "session" использует те же параметры что create client secret :contentReference[oaicite:8]{index=8}
     return {
         "type": "realtime",
         "model": model,
@@ -60,9 +55,20 @@ def build_realtime_session_config(
         "max_output_tokens": max_output_tokens,
         "output_modalities": ["audio"],
         "audio": {
+            "input": {
+                "noise_reduction": {"type": "near_field"},
+                "turn_detection": {
+                    "type": "server_vad",
+                    "threshold": 0.5,
+                    "prefix_padding_ms": 300,
+                    "silence_duration_ms": 500,
+                    "create_response": True,
+                    "interrupt_response": False,
+                },
+            },
             "output": {
                 "voice": voice,
-            }
+            },
         },
     }
 

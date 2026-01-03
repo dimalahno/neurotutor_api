@@ -132,7 +132,7 @@ async def create_call_from_offer(
         instructions=system_prompt,
         model=model,
         voice=voice,
-        max_output_tokens=300,
+        max_output_tokens="inf",
     )
 
     call_res = await create_webrtc_call(sdp_offer=sdp_offer, session_config=session_cfg)
