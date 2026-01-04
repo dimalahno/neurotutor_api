@@ -8,8 +8,19 @@ from app.schemas.lesson_file import LessonFileCreate
 
 
 class LessonFilesService:
+    """
+    Сервис для управления файлами уроков.
+
+    Обрабатывает загрузку и скачивание файлов уроков, 
+    сохраняя их в S3 хранилище и создавая записи в базе данных.
+    """
 
     def __init__(self):
+        """
+        Инициализация сервиса файлов уроков.
+
+        Создает клиент S3 для работы с хранилищем и репозиторий для работы с базой данных.
+        """
         self.s3 = S3Client()
         self.repo = LessonFilesRepository()
 
@@ -20,6 +31,18 @@ class LessonFilesService:
         course_slug: str,
         lesson_slug: str,
     ):
+        """
+        Загрузка файла урока в хранилище.
+
+        Args:
+            db: Сессия базы данных
+            file: Загружаемый файл
+            course_slug: Slug курса
+            lesson_slug: Slug урока
+
+        Returns:
+            Объект базы данных с информацией о загруженном файле
+        """
         content = await file.read()
         size = len(content)
         mime = file.content_type
@@ -47,6 +70,17 @@ class LessonFilesService:
         return db_obj
 
     def download(self, db: Session, file_name: str):
+        """
+        Скачивание файла урока из хранилища.
+
+        Args:
+            db: Сессия базы данных
+            file_name: Имя файла для скачивания
+
+        Returns:
+            Кортеж из объекта базы данных и содержимого файла, 
+            или (None, None) если файл не найден
+        """
         db_obj = self.repo.get_by_file_name(db, file_name)
         if not db_obj:
             return None, None

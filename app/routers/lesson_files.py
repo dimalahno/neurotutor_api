@@ -18,6 +18,11 @@ async def upload_file(
     lesson_slug: str = Form(...),
     db: Session = Depends(get_db),
 ):
+    """
+    Загрузка файла урока в хранилище.
+
+    Принимает файл, slug курса и slug урока, сохраняет файл в S3 и создает запись в базе данных.
+    """
     obj = await lesson_files_service.upload(
         db=db,
         file=file,
@@ -32,6 +37,11 @@ def download_file(
     file_name: str,
     db: Session = Depends(get_db)
 ):
+    """
+    Скачивание файла урока по имени файла.
+
+    Получает файл из хранилища S3 и возвращает его содержимое с соответствующим MIME-типом.
+    """
     db_obj, content = lesson_files_service.download(db, file_name)
     if not db_obj:
         raise HTTPException(status_code=404, detail="File not found")
