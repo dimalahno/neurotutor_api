@@ -39,6 +39,30 @@ services:
     command: server /data --console-address ":9001"
     volumes:
       - minio_data:/data
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+    environment:
+      OLLAMA_NUM_THREADS: 8
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    depends_on:
+      - ollama
+    ports:
+      - "3000:8080"
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+    volumes:
+      - open-webui:/app/backend/data
+    restart: unless-stopped
   
   api:
     build:
@@ -63,3 +87,4 @@ volumes:
   mongodb_data:
   postgres_data:
   minio_data:
+  ollama:

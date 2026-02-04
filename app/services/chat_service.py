@@ -12,6 +12,7 @@ from app.config.mongo_cfg import mongo_db
 from app.services.llm_service import chat_client
 from app.services.llm_utils.compact_lesson_context import extract_compact_context
 from app.services.llm_utils.prompt_builder import build_system_prompt
+from app.services.ollama_service import local_chat_client
 from app.services.user_service import UserService
 
 logger = logging.getLogger(__name__)
@@ -55,7 +56,20 @@ async def start_chat(session: AsyncSession, lesson_id: str, user_id: int) -> Dic
     ctx = extract_compact_context(lesson)
     system_prompt = build_system_prompt(ctx)
 
-    greeting = await chat_client(
+    # greeting = await chat_client(
+    #     system_prompt,
+    #     [
+    #         {
+    #             "role": "user",
+    #             "content": (
+    #                 "Start the conversation with a short greeting related to the lesson "
+    #                 "topic and ask one simple question."
+    #             ),
+    #         }
+    #     ],
+    # )
+
+    greeting = await local_chat_client(
         system_prompt,
         [
             {
@@ -79,8 +93,8 @@ async def start_chat(session: AsyncSession, lesson_id: str, user_id: int) -> Dic
         "user_id": user_id,
         "system_prompt": system_prompt,
         "state": state,
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow(),
+        "created_at": datetime.now(),
+        "updated_at": datetime.now(),
     }
 
     result = await CHAT_COLLECTION.insert_one(doc)
@@ -111,6 +125,7 @@ async def send_chat_message(session: AsyncSession, session_id: str, text: str) -
     ]
 
     assistant_reply = await chat_client(system_prompt, llm_messages)
+    # assistant_reply = await local_chat_client(system_prompt, llm_messages)
 
     history.append({"role": "assistant", "text": assistant_reply})
 

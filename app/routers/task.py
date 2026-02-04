@@ -6,21 +6,9 @@ from app.schemas.audio_check import AudioCheckMeta
 from app.schemas.text_check import TextCheckResponse, TextCheckRequest
 from app.services.llm_service import transcribe_audio, check_text
 from app.services.llm_service import transcribe_and_score
+from app.services.ollama_service import local_check_text
 
 router = APIRouter(prefix="/task", tags=["task"])
-
-
-@router.post("/transcribe_audio")
-async def transcribe_audio_endpoint(file: UploadFile = File(...)):
-    if not file.content_type.startswith("audio/"):
-        raise HTTPException(status_code=400, detail="Invalid audio file")
-
-    text = await transcribe_audio(file)
-    return {
-        "status": "ok",
-        "message": text,
-    }
-
 
 @router.post("/check_audio")
 async def check_audio_endpoint(
@@ -47,4 +35,9 @@ async def check_text_endpoint(payload: TextCheckRequest):
         system_prompt=payload.systemPrompt,
         scoring_dimensions=payload.scoringDimensions,
     )
+    # feedback = await local_check_text(
+    #     text=payload.text,
+    #     system_prompt=payload.systemPrompt,
+    #     scoring_dimensions=payload.scoringDimensions,
+    # )
     return TextCheckResponse(status="ok", message=feedback)

@@ -3,8 +3,8 @@ import os
 import tempfile
 from typing import List, Dict
 
-from openai import AsyncOpenAI
 from fastapi import UploadFile, HTTPException
+from openai import AsyncOpenAI
 from starlette import status
 
 from app.config.main_cfg import settings
